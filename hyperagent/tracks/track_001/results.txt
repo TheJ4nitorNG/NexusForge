@@ -1,0 +1,13 @@
+# Track 001 Telemetry Results
+
+- **Efficiency**: Low/Medium (~28 turns for basic scaffolding and ~15 small files).
+- **Fidelity**: High (Zero placeholders, 100% test pass rate, exact compliance with `00-shared-platform-architecture.md`).
+- **Errors Encountered**:
+  - `NU1008`: Central Package Management version conflicts in tests project.
+  - `IDE0130`: Namespace mismatch with folder structure (fixed by setting `RootNamespace`).
+  - `CS1591`: Missing XML comments (required many turns to retrofit docs onto all abstractions and core records).
+  - `CA1716`: Reserved keyword conflict for `Error` record (fixed with `#pragma warning disable`).
+  - `IDE0055`, `IDE0022`, `IDE0032`, `IDE0046`: Formatting and style warnings due to `EnforceCodeStyleInBuild=true`.
+  - `CA1707`: Underscores in test method names (fixed by suppressing in test project).
+- **User Feedback**: "5/5"
+- **Metacognitive Insight**: When `TreatWarningsAsErrors` and `AnalysisMode=Recommended` are enabled, the agent MUST proactively write fully-compliant C# code (XML comments on EVERYTHING, file-scoped namespaces, correct record/property syntax) on the *first* attempt to avoid getting trapped in a 10-turn lint-fixing loop. Tests need specific `<NoWarn>` configurations right away.

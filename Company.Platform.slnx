@@ -1,0 +1,50 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Platform/">
+    <Project Path="src/Platform/Platform.Abstractions/Platform.Abstractions.csproj" />
+    <Project Path="src/Platform/Platform.Core/Platform.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/Products/" />
+  <Folder Name="/src/Products/CleanSlate/">
+    <Project Path="src/Products/CleanSlate/CleanSlate.Analysis/CleanSlate.Analysis.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.App/CleanSlate.App.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Categorization/CleanSlate.Categorization.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Cleanup/CleanSlate.Cleanup.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Cli/CleanSlate.Cli.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Core/CleanSlate.Core.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Duplicates/CleanSlate.Duplicates.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Integration/CleanSlate.Integration.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Recovery/CleanSlate.Recovery.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Reporting/CleanSlate.Reporting.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Scanner/CleanSlate.Scanner.csproj" />
+    <Project Path="src/Products/CleanSlate/CleanSlate.Windows/CleanSlate.Windows.csproj" />
+  </Folder>
+  <Folder Name="/src/Products/CMDPilot/">
+    <Project Path="src/Products/CMDPilot/CMDPilot.App/CMDPilot.App.csproj" />
+    <Project Path="src/Products/CMDPilot/CMDPilot.Cli/CMDPilot.Cli.csproj" />
+    <Project Path="src/Products/CMDPilot/CMDPilot.Commands/CMDPilot.Commands.csproj" />
+    <Project Path="src/Products/CMDPilot/CMDPilot.Core/CMDPilot.Core.csproj" />
+    <Project Path="src/Products/CMDPilot/CMDPilot.Execution/CMDPilot.Execution.csproj" />
+    <Project Path="src/Products/CMDPilot/CMDPilot.PowerShell/CMDPilot.PowerShell.csproj" />
+    <Project Path="src/Products/CMDPilot/CMDPilot.Risk/CMDPilot.Risk.csproj" />
+  </Folder>
+  <Folder Name="/src/Products/SysMedic/">
+    <Project Path="src/Products/SysMedic/SysMedic.App/SysMedic.App.csproj" />
+    <Project Path="src/Products/SysMedic/SysMedic.Cli/SysMedic.Cli.csproj" />
+    <Project Path="src/Products/SysMedic/SysMedic.Core/SysMedic.Core.csproj" />
+    <Project Path="src/Products/SysMedic/SysMedic.Diagnostics.Windows/SysMedic.Diagnostics.Windows.csproj" />
+    <Project Path="src/Products/SysMedic/SysMedic.Diagnostics/SysMedic.Diagnostics.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/CleanSlate.Scanner.UnitTests/CleanSlate.Scanner.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.App.UnitTests/CMDPilot.App.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.Cli.UnitTests/CMDPilot.Cli.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.Commands.UnitTests/CMDPilot.Commands.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.Core.UnitTests/CMDPilot.Core.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.Execution.UnitTests/CMDPilot.Execution.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.PowerShell.UnitTests/CMDPilot.PowerShell.UnitTests.csproj" />
+    <Project Path="tests/CMDPilot.Risk.UnitTests/CMDPilot.Risk.UnitTests.csproj" />
+    <Project Path="tests/Platform.UnitTests/Platform.UnitTests.csproj" />
+    <Project Path="tests/SysMedic.Diagnostics.UnitTests/SysMedic.Diagnostics.UnitTests.csproj" />
+  </Folder>
+</Solution>
