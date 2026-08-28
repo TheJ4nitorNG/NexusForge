@@ -446,6 +446,12 @@ Icon
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
 
+# Gemini/AI
+SCRATCHPAD.md
+GEMINI.md
+/hyperagent/
+/test/
+
 # Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
