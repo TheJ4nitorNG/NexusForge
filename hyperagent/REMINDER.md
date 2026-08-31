@@ -25,4 +25,4 @@ Project setup initiated. Monitoring for production-readiness.
 - [x] Implement SysMedic Coordinator, CleanSlate Scanner, and CMDPilot Risk Engine with strict C# compliance and safe filesystem access.
 
 ## Track 008
-- [ ] Implement Concrete Capabilities (SysMedic Checks, CleanSlate Categorization) with zero placeholders and zero test warnings.
+- [x] Implement Concrete Capabilities (SysMedic Checks, CleanSlate Categorization) with zero placeholders and zero test warnings.

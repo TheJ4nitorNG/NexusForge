@@ -40,6 +40,7 @@
     <Project Path="src/Products/SysMedic/SysMedic.Diagnostics/SysMedic.Diagnostics.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/CleanSlate.Categorization.UnitTests/CleanSlate.Categorization.UnitTests.csproj" />
     <Project Path="tests/CleanSlate.Scanner.UnitTests/CleanSlate.Scanner.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.App.UnitTests/CMDPilot.App.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Cli.UnitTests/CMDPilot.Cli.UnitTests.csproj" />
@@ -54,5 +55,6 @@
     <Project Path="tests/Platform.UnitTests/Platform.UnitTests.csproj" />
     <Project Path="tests/Platform.Windows.UnitTests/Platform.Windows.UnitTests.csproj" />
     <Project Path="tests/SysMedic.Diagnostics.UnitTests/SysMedic.Diagnostics.UnitTests.csproj" />
+    <Project Path="tests/SysMedic.Diagnostics.Windows.UnitTests/SysMedic.Diagnostics.Windows.UnitTests.csproj" />
   </Folder>
 </Solution>
