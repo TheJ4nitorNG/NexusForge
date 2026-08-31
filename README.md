@@ -1,5 +1,7 @@
 NexusForge
 
+To build run build_release.bat
+
 Build. Diagnose. Automate. Resolve.
 
 NexusForge is a modular ecosystem of professional Windows tools built for system administrators, IT professionals, developers, power users, and incident responders.
