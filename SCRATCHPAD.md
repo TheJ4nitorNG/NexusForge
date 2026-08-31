@@ -1,30 +1,19 @@
 # SCRATCHPAD
 
-## Track 004: CleanSlate Foundation & Scanner Abstractions
+## Track 006: Core Execution and Security Boundary
 
 **Plan:**
-1. Scaffold CleanSlate projects in `src/Products/CleanSlate/`:
-   - `CleanSlate.Core`
-   - `CleanSlate.Scanner`
-   - `CleanSlate.Windows`
-   - `CleanSlate.Categorization`
-   - `CleanSlate.Duplicates`
-   - `CleanSlate.Analysis`
-   - `CleanSlate.Cleanup`
-   - `CleanSlate.Recovery`
-   - `CleanSlate.Reporting`
-   - `CleanSlate.Integration`
-   - `CleanSlate.App`
-   - `CleanSlate.Cli` (console)
-2. Scaffold Test projects in `tests/`:
-   - `CleanSlate.Scanner.UnitTests`
-3. Fix test `.csproj` files for CPM and suppressions using `replace` tool.
-4. Add all projects to `Company.Platform.sln`.
-5. Remove default `Class1.cs` and `UnitTest1.cs`.
-6. Implement core abstractions in `CleanSlate.Scanner`:
-   - `StorageScanOptions.cs` (record)
-   - `ScanProgress.cs` (record)
-   - `StorageScanResult.cs` (record)
-   - `IStorageScanner.cs` (interface)
-7. Write unit tests for models in `CleanSlate.Scanner.UnitTests`.
-8. Run `dotnet build` and `dotnet test` to ensure 0 errors and 0 warnings.
+1. Scaffold projects:
+   - `src/Platform/Platform.Windows`
+   - `src/Platform/Platform.IPC`
+   - `tests/Platform.Windows.UnitTests`
+   - `tests/Platform.IPC.UnitTests`
+2. Add to `Company.Platform.sln`.
+3. Fix test `.csproj` with `replace` tool to add `<NoWarn>` and `<GenerateDocumentationFile>true</GenerateDocumentationFile>`.
+4. Delete default `Class1.cs` and `UnitTest1.cs`.
+5. Add project references. `Platform.Windows` needs `Platform.Abstractions` and `Platform.Core`. `Platform.IPC` needs `Platform.Core`.
+6. Implement `SystemInformationProvider` in `Platform.Windows`. Use WMI/CIM or `System.Runtime.InteropServices.RuntimeInformation` and `System.Environment` to get real data.
+7. Implement `NamedPipeServer` and `NamedPipeClient` in `Platform.IPC` with typed messaging (JSON serialization).
+8. Implement PowerShell AST parser in `CMDPilot.PowerShell` using `System.Management.Automation`. Add this package to Central Package Management.
+9. Write unit tests asserting on real system info, real IPC connections, and real PowerShell AST extraction.
+10. Ensure 0 warnings and 0 failing tests.

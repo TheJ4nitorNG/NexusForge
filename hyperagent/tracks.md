@@ -6,3 +6,5 @@ Track project tasks and development phases here.
 - `[x] track_002`: CMDPilot Core Domain & Command Model - Scaffold CMDPilot projects and implement core domain models.
 - `[x] track_003`: SysMedic Foundation & Diagnostic Abstractions - Scaffold SysMedic projects and define `IDiagnosticCheck` models.
 - `[x] track_004`: CleanSlate Foundation & Scanner Abstractions - Scaffold CleanSlate projects and define `IStorageScanner` models.
+- `[x] track_005`: Implement Platform Providers (IProcessService, IServiceManager) targeting Windows APIs.
+- `[x] track_006`: Core Execution and Security Boundary - Implement remaining Windows Providers, IPC, and CMDPilot.PowerShell AST.

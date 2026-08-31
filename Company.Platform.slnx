@@ -3,6 +3,10 @@
   <Folder Name="/src/Platform/">
     <Project Path="src/Platform/Platform.Abstractions/Platform.Abstractions.csproj" />
     <Project Path="src/Platform/Platform.Core/Platform.Core.csproj" />
+    <Project Path="src/Platform/Platform.IPC/Platform.IPC.csproj" />
+    <Project Path="src/Platform/Platform.Processes/Platform.Processes.csproj" />
+    <Project Path="src/Platform/Platform.Services/Platform.Services.csproj" />
+    <Project Path="src/Platform/Platform.Windows/Platform.Windows.csproj" />
   </Folder>
   <Folder Name="/src/Products/" />
   <Folder Name="/src/Products/CleanSlate/">
@@ -44,7 +48,11 @@
     <Project Path="tests/CMDPilot.Execution.UnitTests/CMDPilot.Execution.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.PowerShell.UnitTests/CMDPilot.PowerShell.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Risk.UnitTests/CMDPilot.Risk.UnitTests.csproj" />
+    <Project Path="tests/Platform.IPC.UnitTests/Platform.IPC.UnitTests.csproj" />
+    <Project Path="tests/Platform.Processes.UnitTests/Platform.Processes.UnitTests.csproj" />
+    <Project Path="tests/Platform.Services.UnitTests/Platform.Services.UnitTests.csproj" />
     <Project Path="tests/Platform.UnitTests/Platform.UnitTests.csproj" />
+    <Project Path="tests/Platform.Windows.UnitTests/Platform.Windows.UnitTests.csproj" />
     <Project Path="tests/SysMedic.Diagnostics.UnitTests/SysMedic.Diagnostics.UnitTests.csproj" />
   </Folder>
 </Solution>

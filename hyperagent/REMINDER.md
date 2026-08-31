@@ -14,3 +14,9 @@ Project setup initiated. Monitoring for production-readiness.
 
 ## Track 004
 - [x] Implement CleanSlate scanner abstractions with full XML docs and 0 test warnings.
+
+## Track 005
+- [x] Implement Platform Providers (IProcessService, IServiceManager) with no placeholders and 0 failing tests.
+
+## Track 006
+- [x] Implement Platform.Windows, Platform.IPC, and CMDPilot.PowerShell AST integration with zero mock data and 0 warnings.
