@@ -1,3 +1,0 @@
-Epoch: 3
-Fitness Score: 0.0
-Telemetry:
