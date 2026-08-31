@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Platform.Services</name>
+    </assembly>
+    <members>
+        <member name="T:Company.Platform.Services.ServiceManager">
+            <summary>
+            Provides information and control over system services using System.ServiceProcess.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Services.ServiceManager.GetServicesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

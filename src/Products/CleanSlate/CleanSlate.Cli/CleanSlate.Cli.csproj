@@ -1,10 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishAot>true</PublishAot>
+    <PublishSingleFile>true</PublishSingleFile>
+    <NoWarn>$(NoWarn);CA1707;CS1591;IDE0058;IDE0008;IDE0065;IL2026;IL2104;IL3050</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Spectre.Console" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Platform\Platform.Core\Platform.Core.csproj" />
+    <ProjectReference Include="..\CleanSlate.Categorization\CleanSlate.Categorization.csproj" />
+    <ProjectReference Include="..\CleanSlate.Scanner\CleanSlate.Scanner.csproj" />
+  </ItemGroup>
 
 </Project>

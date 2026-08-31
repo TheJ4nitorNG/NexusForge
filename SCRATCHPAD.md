@@ -1,24 +1,18 @@
 # SCRATCHPAD
 
-## Track 008: Concrete Capabilities for CLI MVP
+## Track 010: Release Pipeline (The Ship)
 
 **Plan:**
-1. **SysMedic Diagnostic Checks**:
-   - Verify `tests/SysMedic.Diagnostics.Windows.UnitTests` exists. Scaffold if not, configure `<NoWarn>`, add references.
-   - Implement `LogicalDiskSpaceCheck` in `SysMedic.Diagnostics.Windows` using `System.IO.DriveInfo`. Checks system drive free space percentage.
-   - Implement `CriticalServicesCheck` in `SysMedic.Diagnostics.Windows` using `IServiceManager`.
-   - Write integration tests for both.
-   - Run `dotnet format` immediately.
-   - Run `dotnet test`.
-
-2. **CleanSlate Categorization Engine**:
-   - Verify `tests/CleanSlate.Categorization.UnitTests` exists. Scaffold if not, configure `<NoWarn>`, add references.
-   - Define `FileMetadata` (Path, Extension, Size) in `CleanSlate.Core` or `CleanSlate.Categorization`.
-   - Define `IStorageClassificationRule` and `ClassificationResult`.
-   - Implement `PathRule`, `ExtensionRule`, and `CategorizationEngine`.
-   - Write unit tests evaluating file classifications (Temporary, Caches, Installers, User, Windows).
-   - Run `dotnet format` immediately.
-   - Run `dotnet test`.
-
-3. **Verify Compliance**:
-   - Ensure 0 errors, 0 warnings.
+1. Modify `src/Products/CleanSlate/CleanSlate.Cli/CleanSlate.Cli.csproj`.
+   - Add `<PublishAot>true</PublishAot>`
+   - Add `<PublishSingleFile>true</PublishSingleFile>`
+   - Add IL warnings to `NoWarn` (`IL2026;IL2104;IL3050`)
+2. Modify `src/Products/SysMedic/SysMedic.Cli/SysMedic.Cli.csproj`.
+3. Modify `src/Products/CMDPilot/CMDPilot.Cli/CMDPilot.Cli.csproj`.
+4. Create `build_release.bat`.
+   - `mkdir dist` (if not exists)
+   - `dotnet publish src/Products/CleanSlate/CleanSlate.Cli/CleanSlate.Cli.csproj -c Release -r win-x64 -o dist/`
+   - `dotnet publish src/Products/SysMedic/SysMedic.Cli/SysMedic.Cli.csproj -c Release -r win-x64 -o dist/`
+   - `dotnet publish src/Products/CMDPilot/CMDPilot.Cli/CMDPilot.Cli.csproj -c Release -r win-x64 -o dist/`
+5. Execute `build_release.bat` via shell command.
+6. Verify output in `dist/`.

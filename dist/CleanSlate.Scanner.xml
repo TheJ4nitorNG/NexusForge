@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CleanSlate.Scanner</name>
+    </assembly>
+    <members>
+        <member name="T:Company.CleanSlate.Scanner.IStorageScanner">
+            <summary>
+            Provides a mechanism to scan local storage devices for files and directories.
+            </summary>
+        </member>
+        <member name="M:Company.CleanSlate.Scanner.IStorageScanner.ScanAsync(Company.CleanSlate.Scanner.StorageScanOptions,System.IProgress{Company.CleanSlate.Scanner.ScanProgress},System.Threading.CancellationToken)">
+            <summary>
+            Scans the storage asynchronously based on the provided options.
+            </summary>
+            <param name="options">The options configuring the scan behavior.</param>
+            <param name="progress">An optional provider for progress updates.</param>
+            <param name="cancellationToken">A token to cancel the scan operation.</param>
+            <returns>A task representing the asynchronous operation, returning the scan result.</returns>
+        </member>
+        <member name="T:Company.CleanSlate.Scanner.ScanProgress">
+            <summary>
+            Represents the progress of an ongoing storage scan.
+            </summary>
+            <param name="FilesScanned">The number of files scanned so far.</param>
+            <param name="DirectoriesScanned">The number of directories scanned so far.</param>
+            <param name="TotalBytesFound">The total size of files found in bytes.</param>
+            <param name="CurrentDirectory">The path of the directory currently being scanned.</param>
+        </member>
+        <member name="M:Company.CleanSlate.Scanner.ScanProgress.#ctor(System.Int64,System.Int64,System.Int64,System.String)">
+            <summary>
+            Represents the progress of an ongoing storage scan.
+            </summary>
+            <param name="FilesScanned">The number of files scanned so far.</param>
+            <param name="DirectoriesScanned">The number of directories scanned so far.</param>
+            <param name="TotalBytesFound">The total size of files found in bytes.</param>
+            <param name="CurrentDirectory">The path of the directory currently being scanned.</param>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.ScanProgress.FilesScanned">
+            <summary>The number of files scanned so far.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.ScanProgress.DirectoriesScanned">
+            <summary>The number of directories scanned so far.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.ScanProgress.TotalBytesFound">
+            <summary>The total size of files found in bytes.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.ScanProgress.CurrentDirectory">
+            <summary>The path of the directory currently being scanned.</summary>
+        </member>
+        <member name="T:Company.CleanSlate.Scanner.StorageScanner">
+            <summary>
+            A robust and safe scanner for traversing the file system.
+            </summary>
+        </member>
+        <member name="M:Company.CleanSlate.Scanner.StorageScanner.ScanAsync(Company.CleanSlate.Scanner.StorageScanOptions,System.IProgress{Company.CleanSlate.Scanner.ScanProgress},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Company.CleanSlate.Scanner.StorageScanOptions">
+            <summary>
+            Specifies the options for configuring a storage scan.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanOptions.TargetPath">
+            <summary>
+            Gets the starting directory path for the scan.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanOptions.IncludeSystemFiles">
+            <summary>
+            Gets a value indicating whether to include system files in the scan.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanOptions.IncludeHiddenFiles">
+            <summary>
+            Gets a value indicating whether to include hidden files in the scan.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanOptions.IncludeProtectedPaths">
+            <summary>
+            Gets a value indicating whether to include protected paths in the scan.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanOptions.MinimumFileSize">
+            <summary>
+            Gets the minimum file size in bytes to include in the scan results.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanOptions.CalculateHashes">
+            <summary>
+            Gets a value indicating whether to calculate cryptographic hashes for files.
+            </summary>
+        </member>
+        <member name="T:Company.CleanSlate.Scanner.StorageScanResult">
+            <summary>
+            Represents the final result of a storage scan operation.
+            </summary>
+            <param name="TotalFiles">The total number of files discovered.</param>
+            <param name="TotalDirectories">The total number of directories traversed.</param>
+            <param name="TotalBytes">The total size of all scanned files in bytes.</param>
+            <param name="ScanDuration">The duration of the scan operation.</param>
+        </member>
+        <member name="M:Company.CleanSlate.Scanner.StorageScanResult.#ctor(System.Int64,System.Int64,System.Int64,System.TimeSpan)">
+            <summary>
+            Represents the final result of a storage scan operation.
+            </summary>
+            <param name="TotalFiles">The total number of files discovered.</param>
+            <param name="TotalDirectories">The total number of directories traversed.</param>
+            <param name="TotalBytes">The total size of all scanned files in bytes.</param>
+            <param name="ScanDuration">The duration of the scan operation.</param>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanResult.TotalFiles">
+            <summary>The total number of files discovered.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanResult.TotalDirectories">
+            <summary>The total number of directories traversed.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanResult.TotalBytes">
+            <summary>The total size of all scanned files in bytes.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Scanner.StorageScanResult.ScanDuration">
+            <summary>The duration of the scan operation.</summary>
+        </member>
+    </members>
+</doc>

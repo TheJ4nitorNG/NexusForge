@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Platform.Processes</name>
+    </assembly>
+    <members>
+        <member name="T:Company.Platform.Processes.ProcessService">
+            <summary>
+            Provides information about running processes using System.Diagnostics.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Processes.ProcessService.GetProcessesAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

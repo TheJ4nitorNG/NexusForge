@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CMDPilot.Risk</name>
+    </assembly>
+    <members>
+        <member name="T:Company.CMDPilot.Risk.IRiskEngine">
+            <summary>
+            Defines the contract for evaluating the risk of a command proposal.
+            </summary>
+        </member>
+        <member name="M:Company.CMDPilot.Risk.IRiskEngine.Evaluate(Company.CMDPilot.Core.CommandProposal,System.Boolean)">
+            <summary>
+            Evaluates the risk of a given command proposal.
+            </summary>
+            <param name="proposal">The command proposal.</param>
+            <param name="isObfuscated">Whether the command was flagged for obfuscation during parsing.</param>
+            <returns>The calculated risk result.</returns>
+        </member>
+        <member name="T:Company.CMDPilot.Risk.RiskEngine">
+            <summary>
+            Default implementation of the risk engine.
+            </summary>
+        </member>
+        <member name="M:Company.CMDPilot.Risk.RiskEngine.Evaluate(Company.CMDPilot.Core.CommandProposal,System.Boolean)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

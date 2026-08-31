@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CMDPilot.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Company.CMDPilot.Core.EffectType">
+            <summary>
+            Specifies the type of effect a command will have.
+            </summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.ReadFile">
+            <summary>Reads a file.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.WriteFile">
+            <summary>Writes to a file.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.DeleteFile">
+            <summary>Deletes a file.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.CreateProcess">
+            <summary>Creates a process.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.TerminateProcess">
+            <summary>Terminates a process.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.ReadRegistry">
+            <summary>Reads from the registry.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.WriteRegistry">
+            <summary>Writes to the registry.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.StartService">
+            <summary>Starts a service.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.StopService">
+            <summary>Stops a service.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.RestartService">
+            <summary>Restarts a service.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.NetworkConnection">
+            <summary>Establishes a network connection.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.DownloadFile">
+            <summary>Downloads a file.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.UploadFile">
+            <summary>Uploads a file.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.ChangeConfiguration">
+            <summary>Changes system configuration.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.ChangeSecurityPolicy">
+            <summary>Changes security policy.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.ChangeUser">
+            <summary>Changes a user account.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.InstallSoftware">
+            <summary>Installs software.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectType.Unknown">
+            <summary>An unknown effect.</summary>
+        </member>
+        <member name="T:Company.CMDPilot.Core.EffectSeverity">
+            <summary>
+            Specifies the severity of an effect.
+            </summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectSeverity.Info">
+            <summary>Informational severity.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectSeverity.Low">
+            <summary>Low severity.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectSeverity.Moderate">
+            <summary>Moderate severity.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectSeverity.High">
+            <summary>High severity.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.EffectSeverity.Critical">
+            <summary>Critical severity.</summary>
+        </member>
+        <member name="T:Company.CMDPilot.Core.RiskLevel">
+            <summary>
+            Specifies the overall risk level of a command.
+            </summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.RiskLevel.Safe">
+            <summary>Safe to execute.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.RiskLevel.Low">
+            <summary>Low risk.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.RiskLevel.Moderate">
+            <summary>Moderate risk.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.RiskLevel.High">
+            <summary>High risk.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.RiskLevel.Critical">
+            <summary>Critical risk.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.RiskLevel.Unknown">
+            <summary>Unknown risk.</summary>
+        </member>
+        <member name="T:Company.CMDPilot.Core.PrivilegeLevel">
+            <summary>
+            Specifies the privilege level required for execution.
+            </summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.PrivilegeLevel.User">
+            <summary>Standard user privileges.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.PrivilegeLevel.Administrator">
+            <summary>Administrator privileges.</summary>
+        </member>
+        <member name="F:Company.CMDPilot.Core.PrivilegeLevel.System">
+            <summary>SYSTEM privileges.</summary>
+        </member>
+        <member name="T:Company.CMDPilot.Core.CommandEffect">
+            <summary>
+            Represents a specific effect of a command.
+            </summary>
+            <param name="Type">The type of the effect.</param>
+            <param name="Description">A human-readable description of the effect.</param>
+            <param name="Severity">The severity of the effect.</param>
+        </member>
+        <member name="M:Company.CMDPilot.Core.CommandEffect.#ctor(Company.CMDPilot.Core.EffectType,System.String,Company.CMDPilot.Core.EffectSeverity)">
+            <summary>
+            Represents a specific effect of a command.
+            </summary>
+            <param name="Type">The type of the effect.</param>
+            <param name="Description">A human-readable description of the effect.</param>
+            <param name="Severity">The severity of the effect.</param>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandEffect.Type">
+            <summary>The type of the effect.</summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandEffect.Description">
+            <summary>A human-readable description of the effect.</summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandEffect.Severity">
+            <summary>The severity of the effect.</summary>
+        </member>
+        <member name="T:Company.CMDPilot.Core.CommandProposal">
+            <summary>
+            Represents a proposed command ready for risk analysis and user approval.
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.Id">
+            <summary>
+            Gets the unique identifier for this proposal.
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.Shell">
+            <summary>
+            Gets the target shell for execution (e.g., powershell, cmd).
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.CommandText">
+            <summary>
+            Gets the raw command text to be executed.
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.Explanation">
+            <summary>
+            Gets the human-readable explanation of what the command does.
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.RiskLevel">
+            <summary>
+            Gets the evaluated risk level of the command.
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.RequiredPrivilege">
+            <summary>
+            Gets the privilege level required to execute the command.
+            </summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.CommandProposal.Effects">
+            <summary>
+            Gets the list of identified effects this command will have.
+            </summary>
+        </member>
+        <member name="T:Company.CMDPilot.Core.RiskResult">
+            <summary>
+            Represents the result of a risk analysis on a proposed command.
+            </summary>
+            <param name="Level">The determined risk level.</param>
+            <param name="Justification">The explanation for the assigned risk level.</param>
+        </member>
+        <member name="M:Company.CMDPilot.Core.RiskResult.#ctor(Company.CMDPilot.Core.RiskLevel,System.String)">
+            <summary>
+            Represents the result of a risk analysis on a proposed command.
+            </summary>
+            <param name="Level">The determined risk level.</param>
+            <param name="Justification">The explanation for the assigned risk level.</param>
+        </member>
+        <member name="P:Company.CMDPilot.Core.RiskResult.Level">
+            <summary>The determined risk level.</summary>
+        </member>
+        <member name="P:Company.CMDPilot.Core.RiskResult.Justification">
+            <summary>The explanation for the assigned risk level.</summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CleanSlate.Categorization</name>
+    </assembly>
+    <members>
+        <member name="T:Company.CleanSlate.Categorization.CategorizationEngine">
+            <summary>
+            Engine responsible for evaluating a collection of rules against file metadata to determine the best category.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:Company.CleanSlate.Categorization.CategorizationEngine"/> class.
+            </remarks>
+            <param name="rules">The rules to evaluate.</param>
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.CategorizationEngine.#ctor(System.Collections.Generic.IEnumerable{Company.CleanSlate.Categorization.IStorageClassificationRule})">
+            <summary>
+            Engine responsible for evaluating a collection of rules against file metadata to determine the best category.
+            </summary>
+            <remarks>
+            Initializes a new instance of the <see cref="T:Company.CleanSlate.Categorization.CategorizationEngine"/> class.
+            </remarks>
+            <param name="rules">The rules to evaluate.</param>
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.CategorizationEngine.Classify(Company.CleanSlate.Categorization.FileMetadata)">
+            <summary>
+            Classifies the given file metadata into a storage category.
+            </summary>
+            <param name="metadata">The file metadata.</param>
+            <returns>The most confident classification result.</returns>
+        </member>
+        <member name="T:Company.CleanSlate.Categorization.StorageCategory">
+            <summary>
+            Specifies the classification categories for storage items.
+            </summary>
+        </member>
+        <member name="F:Company.CleanSlate.Categorization.StorageCategory.Unknown">
+            <summary>Unknown category.</summary>
+        </member>
+        <member name="F:Company.CleanSlate.Categorization.StorageCategory.Temporary">
+            <summary>Temporary files.</summary>
+        </member>
+        <member name="F:Company.CleanSlate.Categorization.StorageCategory.Caches">
+            <summary>Cache files.</summary>
+        </member>
+        <member name="F:Company.CleanSlate.Categorization.StorageCategory.Installers">
+            <summary>Installer files.</summary>
+        </member>
+        <member name="F:Company.CleanSlate.Categorization.StorageCategory.User">
+            <summary>User data and documents.</summary>
+        </member>
+        <member name="F:Company.CleanSlate.Categorization.StorageCategory.Windows">
+            <summary>Windows system files.</summary>
+        </member>
+        <member name="T:Company.CleanSlate.Categorization.FileMetadata">
+            <summary>
+            Provides metadata about a file for categorization.
+            </summary>
+            <param name="FilePath">The full path to the file.</param>
+            <param name="Extension">The file extension.</param>
+            <param name="SizeBytes">The size of the file in bytes.</param>
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.FileMetadata.#ctor(System.String,System.String,System.Int64)">
+            <summary>
+            Provides metadata about a file for categorization.
+            </summary>
+            <param name="FilePath">The full path to the file.</param>
+            <param name="Extension">The file extension.</param>
+            <param name="SizeBytes">The size of the file in bytes.</param>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.FileMetadata.FilePath">
+            <summary>The full path to the file.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.FileMetadata.Extension">
+            <summary>The file extension.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.FileMetadata.SizeBytes">
+            <summary>The size of the file in bytes.</summary>
+        </member>
+        <member name="T:Company.CleanSlate.Categorization.ClassificationResult">
+            <summary>
+            Represents the result of a classification rule evaluation.
+            </summary>
+            <param name="Category">The determined category.</param>
+            <param name="Confidence">The confidence level of the determination (0-100).</param>
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.ClassificationResult.#ctor(Company.CleanSlate.Categorization.StorageCategory,System.Int32)">
+            <summary>
+            Represents the result of a classification rule evaluation.
+            </summary>
+            <param name="Category">The determined category.</param>
+            <param name="Confidence">The confidence level of the determination (0-100).</param>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.ClassificationResult.Category">
+            <summary>The determined category.</summary>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.ClassificationResult.Confidence">
+            <summary>The confidence level of the determination (0-100).</summary>
+        </member>
+        <member name="T:Company.CleanSlate.Categorization.IStorageClassificationRule">
+            <summary>
+            Defines a rule for categorizing storage items.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.IStorageClassificationRule.Id">
+            <summary>
+            Gets the unique identifier for the rule.
+            </summary>
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.IStorageClassificationRule.Evaluate(Company.CleanSlate.Categorization.FileMetadata)">
+            <summary>
+            Evaluates the metadata and returns a classification result if applicable.
+            </summary>
+            <param name="metadata">The file metadata.</param>
+            <returns>A classification result, or null if the rule does not apply.</returns>
+        </member>
+        <member name="T:Company.CleanSlate.Categorization.ExtensionRule">
+            <summary>
+            Categorizes files based on their extension.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.ExtensionRule.Id">
+            <inheritdoc />
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.ExtensionRule.Evaluate(Company.CleanSlate.Categorization.FileMetadata)">
+            <inheritdoc />
+        </member>
+        <member name="T:Company.CleanSlate.Categorization.PathRule">
+            <summary>
+            Categorizes files based on their path structure.
+            </summary>
+        </member>
+        <member name="P:Company.CleanSlate.Categorization.PathRule.Id">
+            <inheritdoc />
+        </member>
+        <member name="M:Company.CleanSlate.Categorization.PathRule.Evaluate(Company.CleanSlate.Categorization.FileMetadata)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

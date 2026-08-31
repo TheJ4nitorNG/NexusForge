@@ -1,0 +1,354 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Platform.Abstractions</name>
+    </assembly>
+    <members>
+        <member name="T:Company.Platform.Abstractions.CommandExecutionResult">
+            <summary>
+            Represents the result of a command execution.
+            </summary>
+            <param name="ExitCode">The exit code of the process.</param>
+            <param name="StandardOutput">The standard output.</param>
+            <param name="StandardError">The standard error.</param>
+            <param name="ExecutionDuration">The duration of the execution.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.CommandExecutionResult.#ctor(System.Int32,System.String,System.String,System.TimeSpan)">
+            <summary>
+            Represents the result of a command execution.
+            </summary>
+            <param name="ExitCode">The exit code of the process.</param>
+            <param name="StandardOutput">The standard output.</param>
+            <param name="StandardError">The standard error.</param>
+            <param name="ExecutionDuration">The duration of the execution.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandExecutionResult.ExitCode">
+            <summary>The exit code of the process.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandExecutionResult.StandardOutput">
+            <summary>The standard output.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandExecutionResult.StandardError">
+            <summary>The standard error.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandExecutionResult.ExecutionDuration">
+            <summary>The duration of the execution.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.CommandRequest">
+            <summary>
+            Represents a request to execute a command.
+            </summary>
+            <param name="Command">The command to execute.</param>
+            <param name="Arguments">The arguments for the command.</param>
+            <param name="Policy">The execution policy.</param>
+            <param name="RequiresElevation">Whether the command requires elevation.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.CommandRequest.#ctor(System.String,System.Collections.Generic.IReadOnlyList{System.String},Company.Platform.Abstractions.ExecutionPolicy,System.Boolean)">
+            <summary>
+            Represents a request to execute a command.
+            </summary>
+            <param name="Command">The command to execute.</param>
+            <param name="Arguments">The arguments for the command.</param>
+            <param name="Policy">The execution policy.</param>
+            <param name="RequiresElevation">Whether the command requires elevation.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandRequest.Command">
+            <summary>The command to execute.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandRequest.Arguments">
+            <summary>The arguments for the command.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandRequest.Policy">
+            <summary>The execution policy.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.CommandRequest.RequiresElevation">
+            <summary>Whether the command requires elevation.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ExecutionPolicy">
+            <summary>
+            Represents the execution policy and risk level of a command.
+            </summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.ExecutionPolicy.Unknown">
+            <summary>Unknown risk level.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.ExecutionPolicy.ReadOnly">
+            <summary>Read-only operations.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.ExecutionPolicy.LowRisk">
+            <summary>Low risk modifying operations.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.ExecutionPolicy.Modifying">
+            <summary>Modifying operations.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.ExecutionPolicy.Privileged">
+            <summary>Privileged operations requiring elevation.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.ExecutionPolicy.Destructive">
+            <summary>Destructive operations.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.AiRequest">
+            <summary>
+            Contains parameters for executing an AI request.
+            </summary>
+            <param name="SystemPrompt">The system prompt.</param>
+            <param name="UserPrompt">The user prompt.</param>
+            <param name="Parameters">Additional provider-specific parameters.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.AiRequest.#ctor(System.String,System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object})">
+            <summary>
+            Contains parameters for executing an AI request.
+            </summary>
+            <param name="SystemPrompt">The system prompt.</param>
+            <param name="UserPrompt">The user prompt.</param>
+            <param name="Parameters">Additional provider-specific parameters.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiRequest.SystemPrompt">
+            <summary>The system prompt.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiRequest.UserPrompt">
+            <summary>The user prompt.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiRequest.Parameters">
+            <summary>Additional provider-specific parameters.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.AiResponse">
+            <summary>
+            Contains the response from an AI provider.
+            </summary>
+            <param name="Content">The text content of the response.</param>
+            <param name="PromptTokens">Number of tokens in the prompt.</param>
+            <param name="CompletionTokens">Number of tokens in the completion.</param>
+            <param name="Duration">The duration of the AI request.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.AiResponse.#ctor(System.String,System.Int32,System.Int32,System.TimeSpan)">
+            <summary>
+            Contains the response from an AI provider.
+            </summary>
+            <param name="Content">The text content of the response.</param>
+            <param name="PromptTokens">Number of tokens in the prompt.</param>
+            <param name="CompletionTokens">Number of tokens in the completion.</param>
+            <param name="Duration">The duration of the AI request.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiResponse.Content">
+            <summary>The text content of the response.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiResponse.PromptTokens">
+            <summary>Number of tokens in the prompt.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiResponse.CompletionTokens">
+            <summary>Number of tokens in the completion.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.AiResponse.Duration">
+            <summary>The duration of the AI request.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.IAiProvider">
+            <summary>
+            Represents a provider capable of fulfilling AI requests.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.IAiProvider.CompleteAsync(Company.Platform.Abstractions.AiRequest,System.Threading.CancellationToken)">
+            <summary>
+            Completes an AI request asynchronously.
+            </summary>
+            <param name="request">The request parameters.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>The AI response.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ICommandExecutionService">
+            <summary>
+            Provides a mechanism to execute system commands securely.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ICommandExecutionService.ExecuteAsync(Company.Platform.Abstractions.CommandRequest,System.Threading.CancellationToken)">
+            <summary>
+            Executes a command asynchronously.
+            </summary>
+            <param name="request">The command request.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>The result of the command execution.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.LicenseStatus">
+            <summary>
+            Represents the status of a license.
+            </summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.LicenseStatus.Valid">
+            <summary>The license is valid.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.LicenseStatus.Expired">
+            <summary>The license has expired.</summary>
+        </member>
+        <member name="F:Company.Platform.Abstractions.LicenseStatus.Invalid">
+            <summary>The license is invalid.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ILicenseService">
+            <summary>
+            Provides mechanisms to check license and entitlement status.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ILicenseService.GetStatusAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the overall license status asynchronously.
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>The license status.</returns>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ILicenseService.HasEntitlementAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Checks if a specific entitlement is active.
+            </summary>
+            <param name="entitlement">The entitlement identifier.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>True if the entitlement is active; otherwise, false.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.IProcessService">
+            <summary>
+            Provides information about running processes.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.IProcessService.GetProcessesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets the list of currently running processes asynchronously.
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A list of process information.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ISecretStore">
+            <summary>
+            Provides secure storage for sensitive data.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ISecretStore.SetAsync(System.String,System.ReadOnlyMemory{System.Byte})">
+            <summary>
+            Sets a secret value asynchronously.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value to store.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ISecretStore.GetAsync(System.String)">
+            <summary>
+            Gets a secret value asynchronously.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>The secret value, or null if not found.</returns>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ISecretStore.DeleteAsync(System.String)">
+            <summary>
+            Deletes a secret asynchronously.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>A task representing the asynchronous operation.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.IServiceManager">
+            <summary>
+            Provides information and control over system services.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.IServiceManager.GetServicesAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets a list of system services asynchronously.
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A list of service information.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ISystemInformationProvider">
+            <summary>
+            Provides overall system information.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ISystemInformationProvider.GetSystemInformationAsync(System.Threading.CancellationToken)">
+            <summary>
+            Gets system information asynchronously.
+            </summary>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>The system information.</returns>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ProcessInfo">
+            <summary>
+            Contains information about a running process.
+            </summary>
+            <param name="ProcessId">The process ID.</param>
+            <param name="Name">The name of the process.</param>
+            <param name="Path">The executable path, if available.</param>
+            <param name="CommandLine">The command line arguments, if available.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ProcessInfo.#ctor(System.Int32,System.String,System.String,System.String)">
+            <summary>
+            Contains information about a running process.
+            </summary>
+            <param name="ProcessId">The process ID.</param>
+            <param name="Name">The name of the process.</param>
+            <param name="Path">The executable path, if available.</param>
+            <param name="CommandLine">The command line arguments, if available.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ProcessInfo.ProcessId">
+            <summary>The process ID.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ProcessInfo.Name">
+            <summary>The name of the process.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ProcessInfo.Path">
+            <summary>The executable path, if available.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ProcessInfo.CommandLine">
+            <summary>The command line arguments, if available.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.ServiceInfo">
+            <summary>
+            Contains information about a system service.
+            </summary>
+            <param name="ServiceName">The name of the service.</param>
+            <param name="DisplayName">The display name of the service.</param>
+            <param name="Status">The current status of the service.</param>
+            <param name="StartupType">The startup type of the service.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.ServiceInfo.#ctor(System.String,System.String,System.String,System.String)">
+            <summary>
+            Contains information about a system service.
+            </summary>
+            <param name="ServiceName">The name of the service.</param>
+            <param name="DisplayName">The display name of the service.</param>
+            <param name="Status">The current status of the service.</param>
+            <param name="StartupType">The startup type of the service.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ServiceInfo.ServiceName">
+            <summary>The name of the service.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ServiceInfo.DisplayName">
+            <summary>The display name of the service.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ServiceInfo.Status">
+            <summary>The current status of the service.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.ServiceInfo.StartupType">
+            <summary>The startup type of the service.</summary>
+        </member>
+        <member name="T:Company.Platform.Abstractions.SystemInformation">
+            <summary>
+            Contains system-level information.
+            </summary>
+            <param name="OsVersion">The operating system version.</param>
+            <param name="Architecture">The system architecture.</param>
+            <param name="MachineName">The machine name.</param>
+        </member>
+        <member name="M:Company.Platform.Abstractions.SystemInformation.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Contains system-level information.
+            </summary>
+            <param name="OsVersion">The operating system version.</param>
+            <param name="Architecture">The system architecture.</param>
+            <param name="MachineName">The machine name.</param>
+        </member>
+        <member name="P:Company.Platform.Abstractions.SystemInformation.OsVersion">
+            <summary>The operating system version.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.SystemInformation.Architecture">
+            <summary>The system architecture.</summary>
+        </member>
+        <member name="P:Company.Platform.Abstractions.SystemInformation.MachineName">
+            <summary>The machine name.</summary>
+        </member>
+    </members>
+</doc>

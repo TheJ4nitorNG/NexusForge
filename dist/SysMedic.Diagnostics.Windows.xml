@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SysMedic.Diagnostics.Windows</name>
+    </assembly>
+    <members>
+        <member name="T:Company.SysMedic.Diagnostics.Windows.CriticalServicesCheck">
+            <summary>
+            A diagnostic check that ensures critical Windows services are running.
+            </summary>
+            <param name="serviceManager">The service manager dependency.</param>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.Windows.CriticalServicesCheck.#ctor(Company.Platform.Abstractions.IServiceManager)">
+            <summary>
+            A diagnostic check that ensures critical Windows services are running.
+            </summary>
+            <param name="serviceManager">The service manager dependency.</param>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.Windows.CriticalServicesCheck.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.Windows.CriticalServicesCheck.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.Windows.CriticalServicesCheck.Category">
+            <inheritdoc />
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.Windows.CriticalServicesCheck.ExecuteAsync(Company.SysMedic.Diagnostics.DiagnosticContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.Windows.LogicalDiskSpaceCheck">
+            <summary>
+            A diagnostic check that evaluates the free space of logical disks.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.Windows.LogicalDiskSpaceCheck.Id">
+            <inheritdoc />
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.Windows.LogicalDiskSpaceCheck.Name">
+            <inheritdoc />
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.Windows.LogicalDiskSpaceCheck.Category">
+            <inheritdoc />
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.Windows.LogicalDiskSpaceCheck.ExecuteAsync(Company.SysMedic.Diagnostics.DiagnosticContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

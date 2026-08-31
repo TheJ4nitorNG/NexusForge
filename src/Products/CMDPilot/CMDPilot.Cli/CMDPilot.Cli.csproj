@@ -5,6 +5,22 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PublishAot>true</PublishAot>
+    <PublishSingleFile>true</PublishSingleFile>
+    <NoWarn>$(NoWarn);CA1707;CS1591;IDE0058;IDE0008;IDE0065;IL2026;IL2104;IL3050;IL3000;IL3053</NoWarn>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Hosting" />
+    <PackageReference Include="Spectre.Console" />
+    <PackageReference Include="System.CommandLine" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CMDPilot.PowerShell\CMDPilot.PowerShell.csproj" />
+    <ProjectReference Include="..\CMDPilot.Risk\CMDPilot.Risk.csproj" />
+    <ProjectReference Include="..\..\..\Platform\Platform.Core\Platform.Core.csproj" />
+  </ItemGroup>
 
 </Project>

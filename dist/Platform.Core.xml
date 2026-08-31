@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Platform.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Company.Platform.Core.Error">
+            <summary>
+            Represents an error.
+            </summary>
+            <param name="Code">The error code.</param>
+            <param name="Message">The error message.</param>
+        </member>
+        <member name="M:Company.Platform.Core.Error.#ctor(System.String,System.String)">
+            <summary>
+            Represents an error.
+            </summary>
+            <param name="Code">The error code.</param>
+            <param name="Message">The error message.</param>
+        </member>
+        <member name="P:Company.Platform.Core.Error.Code">
+            <summary>The error code.</summary>
+        </member>
+        <member name="P:Company.Platform.Core.Error.Message">
+            <summary>The error message.</summary>
+        </member>
+        <member name="F:Company.Platform.Core.Error.None">
+            <summary>
+            Represents no error.
+            </summary>
+        </member>
+        <member name="F:Company.Platform.Core.Error.NullValue">
+            <summary>
+            Represents a null value error.
+            </summary>
+        </member>
+        <member name="T:Company.Platform.Core.OperationContext">
+            <summary>
+            Represents the context of a running operation.
+            </summary>
+            <param name="OperationId">The unique operation identifier.</param>
+            <param name="StartedAt">The timestamp when the operation started.</param>
+            <param name="Product">The name of the product executing the operation.</param>
+            <param name="Component">The component executing the operation.</param>
+        </member>
+        <member name="M:Company.Platform.Core.OperationContext.#ctor(System.Guid,System.DateTimeOffset,System.String,System.String)">
+            <summary>
+            Represents the context of a running operation.
+            </summary>
+            <param name="OperationId">The unique operation identifier.</param>
+            <param name="StartedAt">The timestamp when the operation started.</param>
+            <param name="Product">The name of the product executing the operation.</param>
+            <param name="Component">The component executing the operation.</param>
+        </member>
+        <member name="P:Company.Platform.Core.OperationContext.OperationId">
+            <summary>The unique operation identifier.</summary>
+        </member>
+        <member name="P:Company.Platform.Core.OperationContext.StartedAt">
+            <summary>The timestamp when the operation started.</summary>
+        </member>
+        <member name="P:Company.Platform.Core.OperationContext.Product">
+            <summary>The name of the product executing the operation.</summary>
+        </member>
+        <member name="P:Company.Platform.Core.OperationContext.Component">
+            <summary>The component executing the operation.</summary>
+        </member>
+        <member name="T:Company.Platform.Core.Result">
+            <summary>
+            Represents the result of an operation.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Core.Result.#ctor(System.Boolean,Company.Platform.Core.Error)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Company.Platform.Core.Result"/> class.
+            </summary>
+            <param name="isSuccess">Indicates whether the operation was successful.</param>
+            <param name="error">The error associated with the result.</param>
+        </member>
+        <member name="P:Company.Platform.Core.Result.IsSuccess">
+            <summary>
+            Gets a value indicating whether the result is successful.
+            </summary>
+        </member>
+        <member name="P:Company.Platform.Core.Result.IsFailure">
+            <summary>
+            Gets a value indicating whether the result is a failure.
+            </summary>
+        </member>
+        <member name="P:Company.Platform.Core.Result.Error">
+            <summary>
+            Gets the error associated with the result.
+            </summary>
+        </member>
+        <member name="M:Company.Platform.Core.Result.Success">
+            <summary>
+            Creates a successful result.
+            </summary>
+            <returns>A successful result.</returns>
+        </member>
+        <member name="M:Company.Platform.Core.Result.Failure(Company.Platform.Core.Error)">
+            <summary>
+            Creates a failure result.
+            </summary>
+            <param name="error">The error.</param>
+            <returns>A failure result.</returns>
+        </member>
+        <member name="M:Company.Platform.Core.Result.Success``1(``0)">
+            <summary>
+            Creates a successful result with a value.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="value">The value.</param>
+            <returns>A successful result.</returns>
+        </member>
+        <member name="M:Company.Platform.Core.Result.Failure``1(Company.Platform.Core.Error)">
+            <summary>
+            Creates a failure result with a value.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+            <param name="error">The error.</param>
+            <returns>A failure result.</returns>
+        </member>
+        <member name="T:Company.Platform.Core.Result`1">
+            <summary>
+            Represents the result of an operation with a return value.
+            </summary>
+            <typeparam name="T">The type of the value.</typeparam>
+        </member>
+        <member name="M:Company.Platform.Core.Result`1.#ctor(`0,System.Boolean,Company.Platform.Core.Error)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Company.Platform.Core.Result`1"/> class.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="isSuccess">Indicates whether the operation was successful.</param>
+            <param name="error">The error associated with the result.</param>
+        </member>
+        <member name="P:Company.Platform.Core.Result`1.Value">
+            <summary>
+            Gets the value associated with the result.
+            </summary>
+        </member>
+    </members>
+</doc>

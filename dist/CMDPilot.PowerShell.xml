@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CMDPilot.PowerShell</name>
+    </assembly>
+    <members>
+        <member name="T:Company.CMDPilot.PowerShell.PowerShellAstAnalyzer">
+            <summary>
+            Provides capabilities to parse and analyze PowerShell scripts using its native AST.
+            </summary>
+        </member>
+        <member name="M:Company.CMDPilot.PowerShell.PowerShellAstAnalyzer.ExtractCommands(System.String)">
+            <summary>
+            Analyzes the provided script text and extracts the names of commands invoked.
+            </summary>
+            <param name="scriptText">The PowerShell script text.</param>
+            <returns>A list of command names found in the script.</returns>
+        </member>
+        <member name="M:Company.CMDPilot.PowerShell.PowerShellAstAnalyzer.DetectObfuscation(System.String)">
+            <summary>
+            Detects potentially obfuscated or dangerous syntax, such as dynamic invocation ('&amp;' operator with variables).
+            </summary>
+            <param name="scriptText">The PowerShell script text.</param>
+            <returns>True if obfuscation patterns are detected; otherwise, false.</returns>
+        </member>
+    </members>
+</doc>

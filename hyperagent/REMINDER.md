@@ -26,3 +26,9 @@ Project setup initiated. Monitoring for production-readiness.
 
 ## Track 008
 - [x] Implement Concrete Capabilities (SysMedic Checks, CleanSlate Categorization) with zero placeholders and zero test warnings.
+
+## Track 009
+- [x] Implement CLI experiences with Spectre.Console, System.CommandLine, and DI with zero placeholders.
+
+## Track 010
+- [x] Implement Release Pipeline (Native AOT, Single File) and generate final executables in `dist/`.

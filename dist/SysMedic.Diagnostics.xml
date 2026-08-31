@@ -1,0 +1,317 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SysMedic.Diagnostics</name>
+    </assembly>
+    <members>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticContext">
+            <summary>
+            Represents the context provided to a diagnostic check when it executes.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticContext.ScanId">
+            <summary>
+            Gets the unique identifier for the current scan operation.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticContext.StartedAt">
+            <summary>
+            Gets the timestamp when the scan started.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticContext.CancellationToken">
+            <summary>
+            Gets the cancellation token for the operation.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticContext.Snapshot">
+            <summary>
+            Gets the system snapshot to use for this scan.
+            </summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticCoordinator">
+            <summary>
+            Default implementation of the diagnostic coordinator that runs checks concurrently.
+            </summary>
+            <param name="checks">The collection of diagnostic checks to execute.</param>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.DiagnosticCoordinator.#ctor(System.Collections.Generic.IEnumerable{Company.SysMedic.Diagnostics.IDiagnosticCheck})">
+            <summary>
+            Default implementation of the diagnostic coordinator that runs checks concurrently.
+            </summary>
+            <param name="checks">The collection of diagnostic checks to execute.</param>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.DiagnosticCoordinator.RunScanAsync(Company.SysMedic.Diagnostics.DiagnosticContext,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticStatus">
+            <summary>
+            Specifies the execution status of a diagnostic check.
+            </summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.NotRun">
+            <summary>Check has not been run.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Running">
+            <summary>Check is currently running.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Passed">
+            <summary>Check passed successfully.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Warning">
+            <summary>Check passed but with warnings.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Failed">
+            <summary>Check failed.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Skipped">
+            <summary>Check was skipped.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Error">
+            <summary>Check encountered an error during execution.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticStatus.Unknown">
+            <summary>Unknown status.</summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticSeverity">
+            <summary>
+            Specifies the severity of a diagnostic finding or result.
+            </summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticSeverity.Information">
+            <summary>Informational only.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticSeverity.Low">
+            <summary>Low severity.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticSeverity.Moderate">
+            <summary>Moderate severity.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticSeverity.High">
+            <summary>High severity.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticSeverity.Critical">
+            <summary>Critical severity.</summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticCategory">
+            <summary>
+            Specifies the category of a diagnostic check.
+            </summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.System">
+            <summary>General system check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.WindowsIntegrity">
+            <summary>Windows integrity check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Performance">
+            <summary>Performance check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Storage">
+            <summary>Storage check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Memory">
+            <summary>Memory check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Network">
+            <summary>Network check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Services">
+            <summary>Services check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Startup">
+            <summary>Startup items check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Security">
+            <summary>Security check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Applications">
+            <summary>Applications check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Hardware">
+            <summary>Hardware check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Updates">
+            <summary>Updates check.</summary>
+        </member>
+        <member name="F:Company.SysMedic.Diagnostics.DiagnosticCategory.Drivers">
+            <summary>Drivers check.</summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticFinding">
+            <summary>
+            Represents a specific finding discovered by a diagnostic check.
+            </summary>
+            <param name="Code">The stable finding code.</param>
+            <param name="Severity">The severity of the finding.</param>
+            <param name="Title">A human-readable title.</param>
+            <param name="Description">A detailed description of the finding.</param>
+            <param name="Metadata">Additional structured metadata.</param>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.DiagnosticFinding.#ctor(System.String,Company.SysMedic.Diagnostics.DiagnosticSeverity,System.String,System.String,System.Collections.Generic.IReadOnlyDictionary{System.String,System.Object})">
+            <summary>
+            Represents a specific finding discovered by a diagnostic check.
+            </summary>
+            <param name="Code">The stable finding code.</param>
+            <param name="Severity">The severity of the finding.</param>
+            <param name="Title">A human-readable title.</param>
+            <param name="Description">A detailed description of the finding.</param>
+            <param name="Metadata">Additional structured metadata.</param>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticFinding.Code">
+            <summary>The stable finding code.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticFinding.Severity">
+            <summary>The severity of the finding.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticFinding.Title">
+            <summary>A human-readable title.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticFinding.Description">
+            <summary>A detailed description of the finding.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticFinding.Metadata">
+            <summary>Additional structured metadata.</summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.DiagnosticResult">
+            <summary>
+            Represents the comprehensive result of executing a diagnostic check.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticResult.CheckId">
+            <summary>
+            Gets the unique identifier of the check that produced this result.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticResult.Status">
+            <summary>
+            Gets the overall execution status.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticResult.Severity">
+            <summary>
+            Gets the highest severity found during the check.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticResult.Summary">
+            <summary>
+            Gets a human-readable summary of the result.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticResult.Details">
+            <summary>
+            Gets additional details, if any.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.DiagnosticResult.Findings">
+            <summary>
+            Gets the list of specific findings.
+            </summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.IDiagnosticCheck">
+            <summary>
+            Defines the contract for an executable diagnostic check.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.IDiagnosticCheck.Id">
+            <summary>
+            Gets the unique identifier for this check.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.IDiagnosticCheck.Name">
+            <summary>
+            Gets the human-readable name of this check.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.IDiagnosticCheck.Category">
+            <summary>
+            Gets the category of this check.
+            </summary>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.IDiagnosticCheck.ExecuteAsync(Company.SysMedic.Diagnostics.DiagnosticContext,System.Threading.CancellationToken)">
+            <summary>
+            Executes the diagnostic check asynchronously.
+            </summary>
+            <param name="context">The execution context.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation, returning the diagnostic result.</returns>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.IDiagnosticCoordinator">
+            <summary>
+            Coordinates the execution of multiple diagnostic checks.
+            </summary>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.IDiagnosticCoordinator.RunScanAsync(Company.SysMedic.Diagnostics.DiagnosticContext,System.Threading.CancellationToken)">
+            <summary>
+            Executes a full scan using the provided context.
+            </summary>
+            <param name="context">The diagnostic context for the scan.</param>
+            <param name="cancellationToken">A token to cancel the operation.</param>
+            <returns>A task representing the asynchronous operation, returning the scan report.</returns>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.ISystemSnapshot">
+            <summary>
+            Provides a stable snapshot of system information that can be shared across multiple diagnostic checks.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ISystemSnapshot.WindowsVersion">
+            <summary>
+            Gets the Windows version.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ISystemSnapshot.BuildNumber">
+            <summary>
+            Gets the Windows build number.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ISystemSnapshot.Architecture">
+            <summary>
+            Gets the system architecture.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ISystemSnapshot.Cpu">
+            <summary>
+            Gets the CPU identifier.
+            </summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ISystemSnapshot.TotalRamBytes">
+            <summary>
+            Gets the total system RAM in bytes.
+            </summary>
+        </member>
+        <member name="T:Company.SysMedic.Diagnostics.ScanReport">
+            <summary>
+            Represents the aggregated report of a full diagnostic scan.
+            </summary>
+            <param name="ScanId">The unique identifier of the scan.</param>
+            <param name="StartedAt">The time the scan started.</param>
+            <param name="Duration">The total duration of the scan.</param>
+            <param name="OverallHealthScore">The calculated health score (0-100).</param>
+            <param name="Results">The list of individual diagnostic results.</param>
+        </member>
+        <member name="M:Company.SysMedic.Diagnostics.ScanReport.#ctor(System.String,System.DateTimeOffset,System.TimeSpan,System.Int32,System.Collections.Generic.IReadOnlyList{Company.SysMedic.Diagnostics.DiagnosticResult})">
+            <summary>
+            Represents the aggregated report of a full diagnostic scan.
+            </summary>
+            <param name="ScanId">The unique identifier of the scan.</param>
+            <param name="StartedAt">The time the scan started.</param>
+            <param name="Duration">The total duration of the scan.</param>
+            <param name="OverallHealthScore">The calculated health score (0-100).</param>
+            <param name="Results">The list of individual diagnostic results.</param>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ScanReport.ScanId">
+            <summary>The unique identifier of the scan.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ScanReport.StartedAt">
+            <summary>The time the scan started.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ScanReport.Duration">
+            <summary>The total duration of the scan.</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ScanReport.OverallHealthScore">
+            <summary>The calculated health score (0-100).</summary>
+        </member>
+        <member name="P:Company.SysMedic.Diagnostics.ScanReport.Results">
+            <summary>The list of individual diagnostic results.</summary>
+        </member>
+    </members>
+</doc>
