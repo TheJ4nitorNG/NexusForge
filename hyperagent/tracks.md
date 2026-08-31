@@ -8,3 +8,5 @@ Track project tasks and development phases here.
 - `[x] track_004`: CleanSlate Foundation & Scanner Abstractions - Scaffold CleanSlate projects and define `IStorageScanner` models.
 - `[x] track_005`: Implement Platform Providers (IProcessService, IServiceManager) targeting Windows APIs.
 - `[x] track_006`: Core Execution and Security Boundary - Implement remaining Windows Providers, IPC, and CMDPilot.PowerShell AST.
+- `[x] track_007`: Core Engines for CLI MVP - Implement SysMedic Coordinator, CleanSlate Scanner, and CMDPilot RiskEngine.
+- `[~] track_008`: Concrete Capabilities - SysMedic diagnostic checks and CleanSlate categorization engine.

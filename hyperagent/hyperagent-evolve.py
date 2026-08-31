@@ -84,7 +84,8 @@ def invoke_hyperagent(telemetry_data, feedback):
                 ["gemini", "-p", "Generate the updated GEMINI.md content based on the provided telemetry."],
                 stdout=outfile,
                 check=True,
-                env=env
+                env=env,
+                shell=True
             )
             
         print("[HYPERAGENT] New DNA sequence generated.")
@@ -120,7 +121,7 @@ def main():
     
     # 5. Splicing DNA
     print("[SYSTEM] Splicing new DNA into active context...")
-    subprocess.run(["python3", "mutate-dna.py"], check=True)
+    subprocess.run([sys.executable, "hyperagent/mutate-dna.py"], check=True)
     
 if __name__ == "__main__":
     main()

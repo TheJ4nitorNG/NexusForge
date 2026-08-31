@@ -1,19 +1,24 @@
 # SCRATCHPAD
 
-## Track 006: Core Execution and Security Boundary
+## Track 007: Core Engines for CLI MVP
 
 **Plan:**
-1. Scaffold projects:
-   - `src/Platform/Platform.Windows`
-   - `src/Platform/Platform.IPC`
-   - `tests/Platform.Windows.UnitTests`
-   - `tests/Platform.IPC.UnitTests`
-2. Add to `Company.Platform.sln`.
-3. Fix test `.csproj` with `replace` tool to add `<NoWarn>` and `<GenerateDocumentationFile>true</GenerateDocumentationFile>`.
-4. Delete default `Class1.cs` and `UnitTest1.cs`.
-5. Add project references. `Platform.Windows` needs `Platform.Abstractions` and `Platform.Core`. `Platform.IPC` needs `Platform.Core`.
-6. Implement `SystemInformationProvider` in `Platform.Windows`. Use WMI/CIM or `System.Runtime.InteropServices.RuntimeInformation` and `System.Environment` to get real data.
-7. Implement `NamedPipeServer` and `NamedPipeClient` in `Platform.IPC` with typed messaging (JSON serialization).
-8. Implement PowerShell AST parser in `CMDPilot.PowerShell` using `System.Management.Automation`. Add this package to Central Package Management.
-9. Write unit tests asserting on real system info, real IPC connections, and real PowerShell AST extraction.
-10. Ensure 0 warnings and 0 failing tests.
+1. **SysMedic DiagnosticCoordinator**:
+   - Implement `IDiagnosticCoordinator` and `DiagnosticCoordinator`.
+   - Take `IEnumerable<IDiagnosticCheck>`.
+   - Execute concurrently with `Task.WhenAll`.
+   - Aggregate `DiagnosticResult`s into a single `ScanReport`.
+   - Write tests simulating slow/failing checks.
+2. **CleanSlate StorageScanner**:
+   - Implement `StorageScanner` (implements `IStorageScanner`).
+   - Recursively traverse directories using `DirectoryInfo.EnumerateFileSystemInfos`.
+   - Catch `UnauthorizedAccessException`, skip ReparsePoints/Symlinks (`Attributes.HasFlag(FileAttributes.ReparsePoint)`).
+   - Report progress via `IProgress<ScanProgress>`.
+   - Write integration tests using a real, temporary directory structure.
+3. **CMDPilot RiskEngine**:
+   - Implement `IRiskEngine` and `RiskEngine`.
+   - Map known commands (e.g. `Get-Process`) to `RiskLevel.Safe`.
+   - Map unknown or potentially destructive commands to `RiskLevel.Unknown` or `RiskLevel.High`.
+   - If `PowerShellAstAnalyzer.DetectObfuscation` is true, force `RiskLevel.High` or `Critical`.
+   - Write unit tests for various command scenarios.
+4. Verify 0 errors, 0 warnings.

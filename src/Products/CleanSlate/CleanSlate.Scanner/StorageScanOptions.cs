@@ -6,6 +6,11 @@ namespace Company.CleanSlate.Scanner;
 public sealed record StorageScanOptions
 {
     /// <summary>
+    /// Gets the starting directory path for the scan.
+    /// </summary>
+    public required string TargetPath { get; init; }
+
+    /// <summary>
     /// Gets a value indicating whether to include system files in the scan.
     /// </summary>
     public bool IncludeSystemFiles { get; init; }

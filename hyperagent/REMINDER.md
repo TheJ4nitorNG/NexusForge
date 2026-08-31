@@ -20,3 +20,9 @@ Project setup initiated. Monitoring for production-readiness.
 
 ## Track 006
 - [x] Implement Platform.Windows, Platform.IPC, and CMDPilot.PowerShell AST integration with zero mock data and 0 warnings.
+
+## Track 007
+- [x] Implement SysMedic Coordinator, CleanSlate Scanner, and CMDPilot Risk Engine with strict C# compliance and safe filesystem access.
+
+## Track 008
+- [ ] Implement Concrete Capabilities (SysMedic Checks, CleanSlate Categorization) with zero placeholders and zero test warnings.

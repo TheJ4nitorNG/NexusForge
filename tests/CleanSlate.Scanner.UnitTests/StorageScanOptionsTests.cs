@@ -11,6 +11,7 @@ public class StorageScanOptionsTests
         // Arrange & Act
         var options = new StorageScanOptions
         {
+            TargetPath = "C:\\test",
             IncludeSystemFiles = true,
             IncludeHiddenFiles = true,
             IncludeProtectedPaths = false,
@@ -19,6 +20,7 @@ public class StorageScanOptionsTests
         };
 
         // Assert
+        options.TargetPath.Should().Be("C:\\test");
         options.IncludeSystemFiles.Should().BeTrue();
         options.IncludeHiddenFiles.Should().BeTrue();
         options.IncludeProtectedPaths.Should().BeFalse();
