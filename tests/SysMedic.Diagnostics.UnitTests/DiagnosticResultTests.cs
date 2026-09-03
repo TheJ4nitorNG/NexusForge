@@ -1,33 +1,37 @@
-namespace Company.SysMedic.Diagnostics.UnitTests;
+using Company.Platform.Abstractions.Diagnostics;
 
-using Company.SysMedic.Diagnostics;
+namespace Company.SysMedic.Diagnostics.UnitTests;
 
 public class DiagnosticResultTests
 {
     [Fact]
-    public void Constructor_ShouldSetProperties()
+    public void DiagnosticResult_CanBeInitialized_WithFindings()
     {
         // Arrange
-        var findings = new List<DiagnosticFinding>
+        DiagnosticFinding finding = new()
         {
-            new("TEST_01", DiagnosticSeverity.Information, "Test Finding", "A finding", new Dictionary<string, object?>())
+            Id = "finding-1",
+            Severity = DiagnosticStatus.Warning,
+            Message = "Disk space is running low",
+            Recommendation = "Free up 5GB"
         };
 
         // Act
-        var result = new DiagnosticResult
+        DiagnosticResult result = new()
         {
-            CheckId = "test.check",
-            Status = DiagnosticStatus.Passed,
-            Severity = DiagnosticSeverity.Information,
-            Summary = "Test passed",
-            Findings = findings
+            CheckId = "disk-check",
+            CheckName = "Disk Check",
+            Status = DiagnosticStatus.Warning,
+            Message = "Completed with warnings",
+            Duration = TimeSpan.FromMilliseconds(50),
+            Findings = [finding]
         };
 
         // Assert
-        result.CheckId.Should().Be("test.check");
-        result.Status.Should().Be(DiagnosticStatus.Passed);
-        result.Severity.Should().Be(DiagnosticSeverity.Information);
-        result.Summary.Should().Be("Test passed");
-        result.Findings.Should().BeEquivalentTo(findings);
+        result.CheckId.Should().Be("disk-check");
+        result.CheckName.Should().Be("Disk Check");
+        result.Status.Should().Be(DiagnosticStatus.Warning);
+        result.Findings.Should().ContainSingle();
+        result.Findings[0].Message.Should().Be("Disk space is running low");
     }
 }

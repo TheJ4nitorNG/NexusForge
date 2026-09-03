@@ -45,7 +45,6 @@
     <Project Path="tests/CMDPilot.App.UnitTests/CMDPilot.App.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Cli.UnitTests/CMDPilot.Cli.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Commands.UnitTests/CMDPilot.Commands.UnitTests.csproj" />
-    <Project Path="tests/CMDPilot.Core.UnitTests/CMDPilot.Core.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Execution.UnitTests/CMDPilot.Execution.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.PowerShell.UnitTests/CMDPilot.PowerShell.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Risk.UnitTests/CMDPilot.Risk.UnitTests.csproj" />

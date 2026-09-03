@@ -1,4 +1,5 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using Company.Platform.Abstractions.Diagnostics;
 
 namespace Company.SysMedic.Diagnostics;
 
@@ -11,8 +12,9 @@ public sealed class DiagnosticCoordinator(IEnumerable<IDiagnosticCheck> checks) 
     private readonly IReadOnlyList<IDiagnosticCheck> _checks = [.. checks];
 
     /// <inheritdoc />
-    public async Task<ScanReport> RunScanAsync(DiagnosticContext context, CancellationToken cancellationToken)
+    public async Task<ScanReport> RunScanAsync(string scanId, DiagnosticContext context)
     {
+        DateTimeOffset startedAt = DateTimeOffset.UtcNow;
         Stopwatch stopwatch = Stopwatch.StartNew();
 
         IEnumerable<Task<DiagnosticResult>> tasks = _checks.Select(async check =>
@@ -20,16 +22,16 @@ public sealed class DiagnosticCoordinator(IEnumerable<IDiagnosticCheck> checks) 
             try
             {
                 // We wrap each check in a try-catch to ensure one failing check does not crash the coordinator.
-                return await check.ExecuteAsync(context, cancellationToken).ConfigureAwait(false);
+                return await check.ExecuteAsync(context).ConfigureAwait(false);
             }
             catch (OperationCanceledException)
             {
                 return new DiagnosticResult
                 {
                     CheckId = check.Id,
+                    CheckName = check.Name,
                     Status = DiagnosticStatus.Skipped,
-                    Severity = DiagnosticSeverity.Information,
-                    Summary = "Check was cancelled."
+                    Message = "Check was cancelled."
                 };
             }
             catch (Exception ex)
@@ -37,10 +39,9 @@ public sealed class DiagnosticCoordinator(IEnumerable<IDiagnosticCheck> checks) 
                 return new DiagnosticResult
                 {
                     CheckId = check.Id,
+                    CheckName = check.Name,
                     Status = DiagnosticStatus.Error,
-                    Severity = DiagnosticSeverity.Critical,
-                    Summary = "An unexpected error occurred during execution.",
-                    Details = ex.Message
+                    Message = "An unexpected error occurred during execution: " + ex.Message
                 };
             }
         });
@@ -49,29 +50,41 @@ public sealed class DiagnosticCoordinator(IEnumerable<IDiagnosticCheck> checks) 
 
         stopwatch.Stop();
 
-        // Calculate a simple health score: 100 - (10 for each critical, 5 for each high, 2 for each moderate, 1 for low)
+        // Calculate a simple health score: 100 - (10 for Critical, 5 for Error, 2 for Warning)
         int healthScore = 100;
         foreach (DiagnosticResult result in results)
         {
-            if (result.Status is DiagnosticStatus.Error or DiagnosticStatus.Failed)
+            if (result.Status is DiagnosticStatus.Error or DiagnosticStatus.Critical)
             {
-                healthScore -= result.Severity switch
+                healthScore -= 10;
+            }
+            else if (result.Status == DiagnosticStatus.Warning)
+            {
+                healthScore -= 2;
+            }
+
+            foreach (DiagnosticFinding finding in result.Findings)
+            {
+                if (finding.Severity == DiagnosticStatus.Critical)
                 {
-                    DiagnosticSeverity.Critical => 10,
-                    DiagnosticSeverity.High => 5,
-                    DiagnosticSeverity.Moderate => 2,
-                    DiagnosticSeverity.Low => 1,
-                    DiagnosticSeverity.Information => 0,
-                    _ => 0
-                };
+                    healthScore -= 10;
+                }
+                else if (finding.Severity == DiagnosticStatus.Error)
+                {
+                    healthScore -= 5;
+                }
+                else if (finding.Severity == DiagnosticStatus.Warning)
+                {
+                    healthScore -= 2;
+                }
             }
         }
 
         healthScore = Math.Max(0, healthScore);
 
         return new ScanReport(
-            context.ScanId,
-            context.StartedAt,
+            scanId,
+            startedAt,
             stopwatch.Elapsed,
             healthScore,
             results);

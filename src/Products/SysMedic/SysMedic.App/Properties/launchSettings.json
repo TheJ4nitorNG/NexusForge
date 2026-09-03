@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "SysMedic.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "SysMedic.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

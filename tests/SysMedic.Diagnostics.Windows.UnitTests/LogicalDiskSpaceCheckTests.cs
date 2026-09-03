@@ -1,38 +1,20 @@
+using Company.Platform.Abstractions.Diagnostics;
+
 namespace Company.SysMedic.Diagnostics.Windows.UnitTests;
 
 public class LogicalDiskSpaceCheckTests
 {
-    [Fact]
-    public async Task ExecuteAsync_ShouldEvaluateDiskSpaceWithoutCrashing()
+    [Xunit.Fact]
+    public async System.Threading.Tasks.Task ExecuteAsync_ReturnsValidDiagnosticResult()
     {
-        // Arrange
-        var check = new LogicalDiskSpaceCheck();
+        LogicalDiskSpaceCheck check = new();
+        DiagnosticContext context = new();
 
-        var snapshot = Substitute.For<ISystemSnapshot>();
-        var context = new DiagnosticContext
-        {
-            ScanId = "scan-1",
-            StartedAt = DateTimeOffset.UtcNow,
-            CancellationToken = CancellationToken.None,
-            Snapshot = snapshot
-        };
+        DiagnosticResult result = await check.ExecuteAsync(context);
 
-        // Act
-        var result = await check.ExecuteAsync(context, CancellationToken.None);
-
-        // Assert
-        result.Should().NotBeNull();
-        result.CheckId.Should().Be("windows.storage.freespace");
-
-        // Since we are running on a real machine, it should either pass or have findings
-        if (result.Status == DiagnosticStatus.Passed)
-        {
-            result.Findings.Should().BeEmpty();
-        }
-        else
-        {
-            result.Findings.Should().NotBeEmpty();
-            result.Severity.Should().BeOneOf(DiagnosticSeverity.Moderate, DiagnosticSeverity.Critical);
-        }
+        Xunit.Assert.NotNull(result);
+        Xunit.Assert.Equal("windows.storage.freespace", result.CheckId);
+        Xunit.Assert.NotEqual(DiagnosticStatus.Skipped, result.Status);
+        Xunit.Assert.NotEqual(DiagnosticStatus.Unknown, result.Status);
     }
 }

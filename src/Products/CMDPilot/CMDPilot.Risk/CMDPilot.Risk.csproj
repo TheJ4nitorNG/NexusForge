@@ -2,6 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CMDPilot.Core\CMDPilot.Core.csproj" />
+    <ProjectReference Include="..\CMDPilot.Commands\CMDPilot.Commands.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

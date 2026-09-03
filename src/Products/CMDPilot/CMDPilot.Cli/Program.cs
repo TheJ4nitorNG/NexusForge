@@ -1,5 +1,5 @@
 using System.CommandLine;
-using Company.CMDPilot.Core;
+using Company.CMDPilot.Commands;
 using Company.CMDPilot.PowerShell;
 using Company.CMDPilot.Risk;
 using Spectre.Console;
@@ -36,21 +36,16 @@ public static class Program
         AnsiConsole.MarkupLine("[bold blue]CMDPilot Analysis[/]");
         AnsiConsole.WriteLine();
 
-        // Manual DI setup for MVP simplicity
         RiskEngine riskEngine = new();
 
         bool isObfuscated = PowerShellAstAnalyzer.DetectObfuscation(script);
         IReadOnlyList<string> extractedCommands = PowerShellAstAnalyzer.ExtractCommands(script);
 
-        // Build a mock proposal (normally the AI would generate this, but for CLI test we just wrap the input)
         CommandProposal proposal = new()
         {
-            Id = Guid.NewGuid().ToString("N"),
-            Shell = "powershell",
             CommandText = script,
-            Explanation = "User-provided script for analysis.",
-            RiskLevel = RiskLevel.Unknown,
-            RequiredPrivilege = PrivilegeLevel.User,
+            Purpose = "User-provided script for analysis.",
+            RequiredPrivilege = PrivilegeLevel.Standard,
             Effects = []
         };
 

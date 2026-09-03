@@ -1,74 +1,67 @@
 using Company.Platform.Abstractions;
+using Company.Platform.Abstractions.Diagnostics;
 
 namespace Company.SysMedic.Diagnostics.Windows.UnitTests;
 
 public class CriticalServicesCheckTests
 {
-    [Fact]
-    public async Task ExecuteAsync_ShouldDetectMissingOrStoppedServices()
+    [Xunit.Fact]
+    public async System.Threading.Tasks.Task ExecuteAsync_WhenAllServicesRunning_ReturnsHealthy()
     {
-        // Arrange
-        var serviceManager = Substitute.For<IServiceManager>();
-        serviceManager.GetServicesAsync(Arg.Any<CancellationToken>())
-            .Returns(Task.FromResult<IReadOnlyList<ServiceInfo>>([
-                new ServiceInfo("Winmgmt", "WMI", "Running", "Auto"),
-                new ServiceInfo("EventLog", "Event Log", "Stopped", "Manual")
-                // RpcSs is intentionally omitted
-            ]));
+        IServiceManager serviceManager = NSubstitute.Substitute.For<IServiceManager>();
+        serviceManager.GetServicesAsync(NSubstitute.Arg.Any<System.Threading.CancellationToken>()).Returns(System.Threading.Tasks.Task.FromResult<System.Collections.Generic.IReadOnlyList<ServiceInfo>>([
+            new ServiceInfo("Winmgmt", "Windows Management Instrumentation", "Running", "Auto"),
+            new ServiceInfo("EventLog", "Windows Event Log", "Running", "Auto"),
+            new ServiceInfo("RpcSs", "Remote Procedure Call (RPC)", "Running", "Auto")
+        ]));
 
-        var check = new CriticalServicesCheck(serviceManager);
+        CriticalServicesCheck check = new(serviceManager);
+        DiagnosticContext context = new();
 
-        var snapshot = Substitute.For<ISystemSnapshot>();
-        var context = new DiagnosticContext
-        {
-            ScanId = "scan-2",
-            StartedAt = DateTimeOffset.UtcNow,
-            CancellationToken = CancellationToken.None,
-            Snapshot = snapshot
-        };
+        DiagnosticResult result = await check.ExecuteAsync(context);
 
-        // Act
-        var result = await check.ExecuteAsync(context, CancellationToken.None);
-
-        // Assert
-        result.Should().NotBeNull();
-        result.Status.Should().Be(DiagnosticStatus.Failed);
-        result.Severity.Should().Be(DiagnosticSeverity.Critical); // Because RpcSs is missing
-        result.Findings.Should().HaveCount(2);
-
-        result.Findings.Should().ContainSingle(f => f.Code == "SERVICE_STOPPED" && f.Title.Contains("EventLog"));
-        result.Findings.Should().ContainSingle(f => f.Code == "SERVICE_MISSING" && f.Title.Contains("RpcSs"));
+        Xunit.Assert.Equal(DiagnosticStatus.Healthy, result.Status);
+        Xunit.Assert.Empty(result.Findings);
     }
 
-    [Fact]
-    public async Task ExecuteAsync_ShouldPassWhenAllAreRunning()
+    [Xunit.Fact]
+    public async System.Threading.Tasks.Task ExecuteAsync_WhenServiceIsStopped_ReturnsError()
     {
-        // Arrange
-        var serviceManager = Substitute.For<IServiceManager>();
-        serviceManager.GetServicesAsync(Arg.Any<CancellationToken>())
-            .Returns(Task.FromResult<IReadOnlyList<ServiceInfo>>([
-                new ServiceInfo("Winmgmt", "WMI", "Running", "Auto"),
-                new ServiceInfo("EventLog", "Event Log", "Running", "Auto"),
-                new ServiceInfo("RpcSs", "RPC", "Running", "Auto")
-            ]));
+        IServiceManager serviceManager = NSubstitute.Substitute.For<IServiceManager>();
+        serviceManager.GetServicesAsync(NSubstitute.Arg.Any<System.Threading.CancellationToken>()).Returns(System.Threading.Tasks.Task.FromResult<System.Collections.Generic.IReadOnlyList<ServiceInfo>>([
+            new ServiceInfo("Winmgmt", "Windows Management Instrumentation", "Stopped", "Auto"),
+            new ServiceInfo("EventLog", "Windows Event Log", "Running", "Auto"),
+            new ServiceInfo("RpcSs", "Remote Procedure Call (RPC)", "Running", "Auto")
+        ]));
 
-        var check = new CriticalServicesCheck(serviceManager);
+        CriticalServicesCheck check = new(serviceManager);
+        DiagnosticContext context = new();
 
-        var snapshot = Substitute.For<ISystemSnapshot>();
-        var context = new DiagnosticContext
-        {
-            ScanId = "scan-3",
-            StartedAt = DateTimeOffset.UtcNow,
-            CancellationToken = CancellationToken.None,
-            Snapshot = snapshot
-        };
+        DiagnosticResult result = await check.ExecuteAsync(context);
 
-        // Act
-        var result = await check.ExecuteAsync(context, CancellationToken.None);
+        Xunit.Assert.Equal(DiagnosticStatus.Error, result.Status);
+        Xunit.Assert.Single(result.Findings);
+        Xunit.Assert.Equal("SERVICE_STOPPED", result.Findings[0].Id);
+        Xunit.Assert.Contains("Winmgmt", result.Findings[0].Message);
+    }
 
-        // Assert
-        result.Should().NotBeNull();
-        result.Status.Should().Be(DiagnosticStatus.Passed);
-        result.Findings.Should().BeEmpty();
+    [Xunit.Fact]
+    public async System.Threading.Tasks.Task ExecuteAsync_WhenServiceIsMissing_ReturnsCritical()
+    {
+        IServiceManager serviceManager = NSubstitute.Substitute.For<IServiceManager>();
+        serviceManager.GetServicesAsync(NSubstitute.Arg.Any<System.Threading.CancellationToken>()).Returns(System.Threading.Tasks.Task.FromResult<System.Collections.Generic.IReadOnlyList<ServiceInfo>>([
+            new ServiceInfo("EventLog", "Windows Event Log", "Running", "Auto"),
+            new ServiceInfo("RpcSs", "Remote Procedure Call (RPC)", "Running", "Auto")
+        ]));
+
+        CriticalServicesCheck check = new(serviceManager);
+        DiagnosticContext context = new();
+
+        DiagnosticResult result = await check.ExecuteAsync(context);
+
+        Xunit.Assert.Equal(DiagnosticStatus.Critical, result.Status);
+        Xunit.Assert.Single(result.Findings);
+        Xunit.Assert.Equal("SERVICE_MISSING", result.Findings[0].Id);
+        Xunit.Assert.Contains("Winmgmt", result.Findings[0].Message);
     }
 }

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CMDPilot.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CMDPilot.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

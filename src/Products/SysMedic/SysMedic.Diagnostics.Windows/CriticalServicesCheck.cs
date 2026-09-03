@@ -1,4 +1,5 @@
 using Company.Platform.Abstractions;
+using Company.Platform.Abstractions.Diagnostics;
 
 namespace Company.SysMedic.Diagnostics.Windows;
 
@@ -10,7 +11,6 @@ public sealed class CriticalServicesCheck(IServiceManager serviceManager) : IDia
 {
     private readonly IServiceManager _serviceManager = serviceManager;
 
-    // A list of basic critical services that generally should be running on Windows 10/11.
     private static readonly string[] CriticalServiceNames = ["Winmgmt", "EventLog", "RpcSs"];
 
     /// <inheritdoc />
@@ -20,66 +20,70 @@ public sealed class CriticalServicesCheck(IServiceManager serviceManager) : IDia
     public string Name => "Critical Windows Services";
 
     /// <inheritdoc />
-    public DiagnosticCategory Category => DiagnosticCategory.Services;
+    public string Category => "Services";
 
     /// <inheritdoc />
-    public async Task<DiagnosticResult> ExecuteAsync(DiagnosticContext context, CancellationToken cancellationToken)
+    public async System.Threading.Tasks.Task<DiagnosticResult> ExecuteAsync(DiagnosticContext context)
     {
-        IReadOnlyList<ServiceInfo> services = await _serviceManager.GetServicesAsync(cancellationToken).ConfigureAwait(false);
+        System.Collections.Generic.IReadOnlyList<ServiceInfo> services = await _serviceManager.GetServicesAsync(context.CancellationToken).ConfigureAwait(false);
 
-        List<DiagnosticFinding> findings = [];
-        DiagnosticSeverity highestSeverity = DiagnosticSeverity.Information;
+        System.Collections.Generic.List<DiagnosticFinding> findings = [];
+        DiagnosticStatus highestSeverity = DiagnosticStatus.Healthy;
 
         foreach (string criticalService in CriticalServiceNames)
         {
-            ServiceInfo? serviceInfo = services.FirstOrDefault(s => s.ServiceName.Equals(criticalService, StringComparison.OrdinalIgnoreCase));
+            ServiceInfo? serviceInfo = System.Linq.Enumerable.FirstOrDefault(services, s => s.ServiceName.Equals(criticalService, System.StringComparison.OrdinalIgnoreCase));
 
             if (serviceInfo == null)
             {
-                findings.Add(new DiagnosticFinding(
-                    "SERVICE_MISSING",
-                    DiagnosticSeverity.Critical,
-                    $"Critical Service Missing: {criticalService}",
-                    $"The service '{criticalService}' is not installed on this system.",
-                    new Dictionary<string, object?> { { "ServiceName", criticalService } }));
-                highestSeverity = DiagnosticSeverity.Critical;
-            }
-            else if (!serviceInfo.Status.Equals("Running", StringComparison.OrdinalIgnoreCase))
-            {
-                findings.Add(new DiagnosticFinding(
-                    "SERVICE_STOPPED",
-                    DiagnosticSeverity.High,
-                    $"Critical Service Stopped: {criticalService}",
-                    $"The service '{criticalService}' is currently in state '{serviceInfo.Status}'.",
-                    new Dictionary<string, object?> { { "ServiceName", criticalService }, { "Status", serviceInfo.Status } }));
-
-                if (highestSeverity < DiagnosticSeverity.High)
+                findings.Add(new DiagnosticFinding
                 {
-                    highestSeverity = DiagnosticSeverity.High;
+                    Id = "SERVICE_MISSING",
+                    Severity = DiagnosticStatus.Critical,
+                    Message = $"Critical Service Missing: The service '{criticalService}' is not installed on this system.",
+                    Recommendation = "Ensure core Windows services are not disabled by unauthorized optimization tools."
+                });
+
+                highestSeverity = DiagnosticStatus.Critical;
+            }
+            else if (!serviceInfo.Status.Equals("Running", System.StringComparison.OrdinalIgnoreCase))
+            {
+                findings.Add(new DiagnosticFinding
+                {
+                    Id = "SERVICE_STOPPED",
+                    Severity = DiagnosticStatus.Error,
+                    Message = $"Critical Service Stopped: The service '{criticalService}' is currently in state '{serviceInfo.Status}'.",
+                    Recommendation = $"Start the '{criticalService}' service."
+                });
+
+                if (highestSeverity != DiagnosticStatus.Critical)
+                {
+                    highestSeverity = DiagnosticStatus.Error;
                 }
             }
         }
 
         DiagnosticStatus status = highestSeverity switch
         {
-            DiagnosticSeverity.Critical => DiagnosticStatus.Failed,
-            DiagnosticSeverity.High => DiagnosticStatus.Failed,
-            DiagnosticSeverity.Moderate => DiagnosticStatus.Warning,
-            DiagnosticSeverity.Low => DiagnosticStatus.Passed,
-            DiagnosticSeverity.Information => DiagnosticStatus.Passed,
-            _ => DiagnosticStatus.Passed
+            DiagnosticStatus.Critical => DiagnosticStatus.Critical,
+            DiagnosticStatus.Error => DiagnosticStatus.Error,
+            DiagnosticStatus.Warning => DiagnosticStatus.Warning,
+            DiagnosticStatus.Healthy => DiagnosticStatus.Healthy,
+            DiagnosticStatus.Skipped => DiagnosticStatus.Skipped,
+            DiagnosticStatus.Unknown => DiagnosticStatus.Unknown,
+            _ => DiagnosticStatus.Healthy
         };
 
-        string summary = status == DiagnosticStatus.Passed
+        string summary = status == DiagnosticStatus.Healthy
             ? "All critical Windows services are running."
             : $"Found {findings.Count} critical service issues.";
 
         return new DiagnosticResult
         {
             CheckId = Id,
+            CheckName = Name,
             Status = status,
-            Severity = highestSeverity,
-            Summary = summary,
+            Message = summary,
             Findings = findings
         };
     }

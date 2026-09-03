@@ -2,6 +2,7 @@ using System.CommandLine;
 using Company.Platform.Services;
 using Company.SysMedic.Diagnostics;
 using Company.SysMedic.Diagnostics.Windows;
+using Company.Platform.Abstractions.Diagnostics;
 using Spectre.Console;
 
 namespace Company.SysMedic.Cli;
@@ -34,7 +35,6 @@ public static class Program
         AnsiConsole.MarkupLine("[bold blue]SysMedic Diagnostics[/] - Starting Scan...");
         AnsiConsole.WriteLine();
 
-        // Manual DI setup for MVP simplicity
         ServiceManager serviceManager = new();
 
         IDiagnosticCheck[] checks =
@@ -47,10 +47,8 @@ public static class Program
 
         DiagnosticContext context = new()
         {
-            ScanId = Guid.NewGuid().ToString("N"),
-            StartedAt = DateTimeOffset.UtcNow,
             CancellationToken = CancellationToken.None,
-            Snapshot = new DummySnapshot() // Real snapshot provider would go here
+            IsElevated = false
         };
 
         ScanReport? report = null;
@@ -58,7 +56,7 @@ public static class Program
         await AnsiConsole.Status()
             .StartAsync("Running diagnostic checks...", async ctx =>
             {
-                report = await coordinator.RunScanAsync(context, CancellationToken.None).ConfigureAwait(false);
+                report = await coordinator.RunScanAsync(Guid.NewGuid().ToString("N"), context).ConfigureAwait(false);
             }).ConfigureAwait(false);
 
         if (report != null)
@@ -78,44 +76,37 @@ public static class Program
             {
                 string statusMarkup = result.Status switch
                 {
-                    DiagnosticStatus.Passed => "[green]PASS[/]",
+                    DiagnosticStatus.Healthy => "[green]PASS[/]",
                     DiagnosticStatus.Warning => "[yellow]WARN[/]",
-                    DiagnosticStatus.Failed => "[red]FAIL[/]",
+                    DiagnosticStatus.Critical => "[red]FAIL[/]",
                     DiagnosticStatus.Error => "[bold red]ERR[/]",
                     DiagnosticStatus.Skipped => "[grey]SKIP[/]",
-                    DiagnosticStatus.NotRun => throw new NotImplementedException(),
-                    DiagnosticStatus.Running => throw new NotImplementedException(),
-                    DiagnosticStatus.Unknown => throw new NotImplementedException(),
+                    DiagnosticStatus.Unknown => "[grey]UNKNOWN[/]",
                     _ => "[grey]UNKNOWN[/]"
                 };
 
                 table.AddRow(
                     new Markup(result.CheckId),
                     new Markup(statusMarkup),
-                    new Markup(result.Summary));
+                    new Markup(result.Message ?? "No message"));
             }
 
             AnsiConsole.Write(table);
 
-            var issues = report.Results.SelectMany(r => r.Findings).ToList();
+            List<DiagnosticFinding> issues = [.. report.Results.SelectMany(r => r.Findings)];
             if (issues.Count != 0)
             {
                 AnsiConsole.WriteLine();
                 AnsiConsole.MarkupLine("[bold red]Actionable Findings:[/]");
                 foreach (DiagnosticFinding finding in issues)
                 {
-                    AnsiConsole.MarkupLine($"- [{finding.Severity}] {finding.Title}: {finding.Description}");
+                    AnsiConsole.MarkupLine($"- [{finding.Severity}] {finding.Id}: {finding.Message}");
+                    if (!string.IsNullOrEmpty(finding.Recommendation))
+                    {
+                        AnsiConsole.MarkupLine($"  [dim]Recommendation: {finding.Recommendation}[/]");
+                    }
                 }
             }
         }
-    }
-
-    private sealed class DummySnapshot : ISystemSnapshot
-    {
-        public string WindowsVersion => "Windows 11";
-        public string BuildNumber => "22621";
-        public string Architecture => "x64";
-        public string Cpu => "Generic CPU";
-        public long TotalRamBytes => 16L * 1024 * 1024 * 1024;
     }
 }

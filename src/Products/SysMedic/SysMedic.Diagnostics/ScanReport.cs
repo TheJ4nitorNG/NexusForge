@@ -1,3 +1,5 @@
+﻿using Company.Platform.Abstractions.Diagnostics;
+
 namespace Company.SysMedic.Diagnostics;
 
 /// <summary>

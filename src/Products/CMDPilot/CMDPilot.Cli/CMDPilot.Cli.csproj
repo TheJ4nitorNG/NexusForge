@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CMDPilot.PowerShell\CMDPilot.PowerShell.csproj" />
     <ProjectReference Include="..\CMDPilot.Risk\CMDPilot.Risk.csproj" />
+    <ProjectReference Include="..\CMDPilot.Commands\CMDPilot.Commands.csproj" />
     <ProjectReference Include="..\..\..\Platform\Platform.Core\Platform.Core.csproj" />
   </ItemGroup>
 

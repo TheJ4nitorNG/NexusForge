@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "CleanSlate.App (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "CleanSlate.App (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

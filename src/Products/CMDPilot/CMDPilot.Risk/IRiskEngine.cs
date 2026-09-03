@@ -1,4 +1,4 @@
-using Company.CMDPilot.Core;
+using Company.CMDPilot.Commands;
 
 namespace Company.CMDPilot.Risk;
 
