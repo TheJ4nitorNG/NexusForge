@@ -125,6 +125,12 @@
 #### Build. Diagnose. Automate. Resolve.
 
 
+<<<<<<< HEAD
+=======
+To build run build_release.bat
+
+Build. Diagnose. Automate. Resolve.
+>>>>>>> 19531c7ff1efc44ebbe95fbe8ca8f634f65ebb32
 
 NexusForge is a modular ecosystem of professional Windows tools built for system administrators, IT professionals, developers, power users, and incident responders.
 
