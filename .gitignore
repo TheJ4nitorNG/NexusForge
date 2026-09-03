@@ -449,6 +449,14 @@ Icon
 # Gemini/AI
 SCRATCHPAD.md
 GEMINI.md
+/hyperagent/
+GEMINI.md
+SCRATCHPAD.md
+01 — Shared Platform Architecture &.txt
+01-shared-platform-architecture-build-plan.md
+02-cmdpilot-architecture-build-plan.md
+03-sysmedic-architecture-build-plan.md
+04-cleanslate-architecture-build-plan.md
 /test/
 
 # Directories potentially created on remote AFP share
