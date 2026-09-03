@@ -1,23 +1,27 @@
 # Track 013 Plan
 
 ## Objective
-Implement the System Snapshot provider and the initial suite of Windows Diagnostic Checks for SysMedic.
+Implement the safe cleanup and deletion engine for CleanSlate (`CleanSlate.Cleanup`).
 
 ## Tasks
-**Phase 1: SYSTEM SNAPSHOT (Platform.Windows)**
-- [x] In `src/Platform/Platform.Abstractions`, define the `ISystemSnapshot` model if it doesn't exist, including OS Version, CPU Name, Total Physical Memory, and System Uptime.
-- [x] In `src/Platform/Platform.Windows`, implement `ISystemInformationProvider` to gather a real `SystemSnapshot`. This should use native .NET or CIM/WMI to accurately retrieve the data.
-- [x] Write unit tests to verify the data gathering logic gracefully handles potential WMI/CIM failures.
+**Phase 1: Core Models & Interfaces (`CleanSlate.Cleanup`)**
+- [x] Create `CleanupAction.cs` (representing a single file deletion action).
+- [x] Create `CleanupProfile.cs` (configuring what categories are active).
+- [x] Create `ICleanupEngine.cs` defining:
+    - `Task<IReadOnlyList<CleanupAction>> PreviewCleanupAsync(CleanupProfile profile, CancellationToken token)`
+    - `Task<CleanupResult> ExecuteCleanupAsync(IReadOnlyList<CleanupAction> actions, CancellationToken token)`
 
-**Phase 2: IMPLEMENT DIAGNOSTIC CHECKS (SysMedic.Diagnostics.Windows)**
-- [ ] Implement `LogicalDiskSpaceCheck`: Queries all local drives. Fails with a "Warning" if free space is < 15%, and "Critical" if < 5%.
-- [ ] Implement `CriticalServicesCheck`: Queries the status of essential Windows services (e.g., `Winmgmt`, `Dnscache`, `LanmanWorkstation`). Fails with "Error" status if any are stopped or erroring.
-- [ ] Write unit tests for both checks in `tests/SysMedic.Diagnostics.Windows.UnitTests`. Use NSubstitute to mock the WMI/FileSystem abstractions for testing, while ensuring the production code uses real Windows APIs.
+**Phase 2: The Cleanup Engine Implementation (`CleanupEngine.cs`)**
+- [x] Implement the hardcoded directory blacklist check (`C:\Windows`, `C:\Program Files`, etc.).
+- [x] Implement safe file deletion with exception tolerance (locked/in-use log files skip without crashing).
+- [x] Integrate a progressive deletion reporter.
 
-**General Constraints**
-- Continue skipping GUI/XAML development. Validate all logic via `SysMedic.Cli` and unit tests targeting `.NET 10`.
-- Adhere to the Production-First Mandate: Zero mocks, zero placeholders in production code. Every diagnostic check must read real Windows data.
-- Execute `dotnet build` and `dotnet test` frequently to validate your work. Log the raw output to `SCRATCHPAD.md` and `hyperagent/epoch_results.txt`.
+**Phase 3: Rigorous Safeguard Testing (`CleanSlate.Cleanup.UnitTests`)**
+- [x] Create a new test project `tests/CleanSlate.Cleanup.UnitTests`.
+- [x] Write unit tests verifying:
+    - Dry-run matches execution size.
+    - Blacklist Block throws `CriticalSecurityException` and deletes 0 files.
+    - Deletion of temporary test files is completed successfully.
 
 ## Telemetry Target
-We will track implementation accuracy and completeness. Note that we will take as many turns as necessary to avoid placeholders, ensuring 100% production-ready code.
+Track implementation accuracy and completeness. Ensure 100% production-ready code with zero placeholders or mocks. Raw build/test output will be logged to `SCRATCHPAD.md` and `hyperagent/epoch_results.txt`.

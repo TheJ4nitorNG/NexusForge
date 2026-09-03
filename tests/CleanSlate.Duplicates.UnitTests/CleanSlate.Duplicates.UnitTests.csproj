@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CA1707;CS1591;IDE0058</NoWarn>
+    <NoWarn>$(NoWarn);CA1707;CS1591;IDE0058;IDE0008;IDE0065</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,19 +15,15 @@
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
     <PackageReference Include="FluentAssertions" />
-    <PackageReference Include="NSubstitute" />
   </ItemGroup>
 
   <ItemGroup>
     <Using Include="Xunit" />
     <Using Include="FluentAssertions" />
-    <Using Include="NSubstitute" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Platform\Platform.Core\Platform.Core.csproj" />
+    <ProjectReference Include="..\..\src\Products\CleanSlate\CleanSlate.Duplicates\CleanSlate.Duplicates.csproj" />
   </ItemGroup>
 
 </Project>
-
-

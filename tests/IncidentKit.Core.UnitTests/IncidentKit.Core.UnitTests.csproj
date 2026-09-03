@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);CA1707;CS1591;IDE0058</NoWarn>
+    <NoWarn>$(NoWarn);CA1707;CS1591;IDE0058;IDE0008;IDE0065</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -25,9 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Platform\Platform.Core\Platform.Core.csproj" />
+    <ProjectReference Include="..\..\src\Products\IncidentKit\IncidentKit.Core\IncidentKit.Core.csproj" />
   </ItemGroup>
 
 </Project>
-
-

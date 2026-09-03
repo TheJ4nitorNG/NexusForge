@@ -39,8 +39,14 @@
     <Project Path="src/Products/SysMedic/SysMedic.Diagnostics.Windows/SysMedic.Diagnostics.Windows.csproj" />
     <Project Path="src/Products/SysMedic/SysMedic.Diagnostics/SysMedic.Diagnostics.csproj" />
   </Folder>
+  <Folder Name="/src/Products/IncidentKit/">
+    <Project Path="src/Products/IncidentKit/IncidentKit.Cli/IncidentKit.Cli.csproj" />
+    <Project Path="src/Products/IncidentKit/IncidentKit.Core/IncidentKit.Core.csproj" />
+  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/CleanSlate.Categorization.UnitTests/CleanSlate.Categorization.UnitTests.csproj" />
+    <Project Path="tests/CleanSlate.Cleanup.UnitTests/CleanSlate.Cleanup.UnitTests.csproj" />
+    <Project Path="tests/CleanSlate.Duplicates.UnitTests/CleanSlate.Duplicates.UnitTests.csproj" />
     <Project Path="tests/CleanSlate.Scanner.UnitTests/CleanSlate.Scanner.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.App.UnitTests/CMDPilot.App.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Cli.UnitTests/CMDPilot.Cli.UnitTests.csproj" />
@@ -48,6 +54,7 @@
     <Project Path="tests/CMDPilot.Execution.UnitTests/CMDPilot.Execution.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.PowerShell.UnitTests/CMDPilot.PowerShell.UnitTests.csproj" />
     <Project Path="tests/CMDPilot.Risk.UnitTests/CMDPilot.Risk.UnitTests.csproj" />
+    <Project Path="tests/IncidentKit.Core.UnitTests/IncidentKit.Core.UnitTests.csproj" />
     <Project Path="tests/Platform.IPC.UnitTests/Platform.IPC.UnitTests.csproj" />
     <Project Path="tests/Platform.Processes.UnitTests/Platform.Processes.UnitTests.csproj" />
     <Project Path="tests/Platform.Services.UnitTests/Platform.Services.UnitTests.csproj" />
